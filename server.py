@@ -12,13 +12,9 @@ api = Api(app)
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
-# @app.route('/api/hello', methods=['POST'])
-# def yout():
-#     return {
-#         "hi":"Sup"
-#     }
-
 api.add_resource(HelloApiHandler, '/flask/hello')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    print(port)
+    app.run(debug=False,host='0.0.0.0',port=port)
