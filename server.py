@@ -12,12 +12,6 @@ api = Api(app)
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
-# @app.route('/api/hello', methods=['POST'])
-# def yout():
-#     return {
-#         "hi":"Sup"
-#     }
-
 api.add_resource(HelloApiHandler, '/flask/hello')
 
 if __name__ == '__main__':
