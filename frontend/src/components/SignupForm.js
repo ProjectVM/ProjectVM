@@ -4,6 +4,7 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [Username, setUsername] = useState("");
 
   const handleEmailInput = (event) => {
     console.log(event.target.value);
@@ -13,6 +14,11 @@ const SignupForm = () => {
   const handlePasswordInput = (event) => {
     console.log(event.target.value);
     setPassword(event.target.value);
+  };
+
+  const handleUsernameInput = (event) => {
+    console.log(event.target.value);
+    setUsername(event.target.value);
   };
 
   return (
@@ -25,6 +31,16 @@ const SignupForm = () => {
           id="exampleEmail"
           placeholder="with a placeholder"
           onChange={handleEmailInput}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label for="exampleUsername">Username</Label>
+        <Input
+          type="Username"
+          name="Username"
+          id="exampleUsername"
+          placeholder="with a placeholder"
+          onChange={handleUsernameInput}
         />
       </FormGroup>
       <FormGroup>
