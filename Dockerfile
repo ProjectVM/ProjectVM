@@ -15,6 +15,7 @@ RUN apt-get install -y npm
 COPY . .
 
 # Download dependencies
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN npm install
 
