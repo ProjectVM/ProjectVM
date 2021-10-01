@@ -17,7 +17,6 @@ COPY . .
 # Download dependencies
 RUN pip install -r requirements.txt
 RUN npm install
-RUN npm build
 
 EXPOSE $PORT
 CMD python server.py $PORT
