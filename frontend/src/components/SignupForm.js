@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -37,6 +37,8 @@ const SignupForm = () => {
           onChange={handlePasswordInput}
         />
       </FormGroup>
+      <br />
+      <Button color="primary">Submit</Button>
     </Form>
   );
 };
