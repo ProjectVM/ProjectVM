@@ -6,9 +6,9 @@ class NavBar extends Component {
   render() {
     return (
       <React.Fragment>
-        <nav class="navbar navbar-light bg-light">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+        <nav className="navbar navbar-light bg-light">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">
               ProjectVM
             </a>
           </div>
