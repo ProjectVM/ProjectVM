@@ -1,0 +1,35 @@
+.background{
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(38, 70, 83, 0.9);
+}
+
+.projectVM{
+  font-size: 96px;
+  color: white;
+  text-shadow: 5px 5px rgba(38, 70, 83, 0.9);
+}
+
+.loginWrapper{
+  height: 100vh;
+  width: 60vw;
+  right: 20vw;
+  position: absolute;
+  background-color: rgba(190, 154, 111, 1);
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+#submitButton{
+  width: 12vw;
+  color: white;
+  background-color: rgba(38, 70, 83, 0.9);
+  padding: 10px;
+  border-radius: 25px;
+  
+}
+
