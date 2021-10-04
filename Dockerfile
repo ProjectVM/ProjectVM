@@ -13,7 +13,8 @@ RUN apt-get install -y npm
 
 # Copy all app files into the image
 COPY . .
-
+RUN pyvenv venv
+RUN pyvenv activate venv
 # Download dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
