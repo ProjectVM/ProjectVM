@@ -21,6 +21,27 @@ const SignupForm = () => {
     setUsername(event.target.value);
   };
 
+  const submitUserData = () => {
+    fetch("/api/register_user", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        Username,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <Form>
       <FormGroup>
@@ -54,7 +75,9 @@ const SignupForm = () => {
         />
       </FormGroup>
       <br />
-      <Button color="primary">Submit</Button>
+      <Button color="primary" onClick={submitUserData}>
+        Submit
+      </Button>
     </Form>
   );
 };
