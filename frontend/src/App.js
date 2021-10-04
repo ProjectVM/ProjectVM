@@ -10,12 +10,12 @@ function App() {
     fetch("/api")
       .then((response) => {
         if (response.status === 200) {
-          return response.json;
+          return response.json();
         }
       })
       .then((data) => console.log(data))
       .then((error) => console.log(error));
-  });
+  }, []);
 
   return (
     <Container className="App" fluid="sm">
