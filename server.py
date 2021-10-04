@@ -1,7 +1,10 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
+from flask.wrappers import Request
 from flask_restful import Api, Resource, reqparse
 #from flask_cors import CORS #comment this on deployment
 from api.HelloApiHandler import HelloApiHandler
+from pymongo import MongoClient
+from database import *
 import sys
 
 app = Flask(__name__, static_url_path='', static_folder='frontend/build')
@@ -17,6 +20,15 @@ def api_serve():
     return {
         "flask": "Connected to React"
     }
+
+@app.route('/api/register_user', methods=['POST'])
+def register():
+    account_information = request.json
+    add_acc(account_information)
+    return {
+        "GET": "YEET"
+    }
+
 
 api.add_resource(HelloApiHandler, '/flask/hello')
 
