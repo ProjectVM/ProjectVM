@@ -22,7 +22,7 @@ const SignupForm = () => {
   };
 
   const submitUserData = () => {
-    fetch("/api/register_user", {
+    fetch("/register_user", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
