@@ -1,0 +1,60 @@
+.Background{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(38, 70, 83, 0.9);
+}
+.Container{
+    position: absolute;
+    background-color: rgba(190, 154, 111, 1);
+    width: 60vw;
+    height: 100vh;
+    right: 20%;
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+}
+
+.Contents{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    justify-items: center;
+}
+
+.CreateAccount{
+    color: white;
+    text-shadow: 5px, 5px, rgba(57, 104, 96, 1);
+}
+
+.Input{
+    width: 25vw;
+    padding: 8px;
+    margin-top: 0%;
+    border: black;
+    outline: none;
+    font-size: 20px;
+    background-color: white;
+  }
+
+.Start-button{
+    background-color: rgba(57, 104, 96, 1);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
+  
+.Start-button:hover{
+    background-color: rgba(57, 104, 96, 0.5);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
