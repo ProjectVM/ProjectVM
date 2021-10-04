@@ -11,8 +11,8 @@ app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 #CORS(app) #comment this on deployment
 api = Api(app)
 
-@app.route('/', methods=['GET'])
-def serve():
+@app.route('/login', methods=['GET'])
+def login():
     return send_from_directory(app.static_folder,'index.html')
 
 @app.route('/api', methods=['GET'])
