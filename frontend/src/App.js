@@ -1,4 +1,4 @@
-import SignupForm from "./components/SignupForm";
+import SignupForm from "./components/Signup/SignupForm";
 import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import { Container, Row, Col, Button } from "reactstrap";
