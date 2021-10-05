@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./login.css";
 
 function LoginForm() {
@@ -7,20 +8,23 @@ function LoginForm() {
 
   return (
     <div className="background">
-    <form className="loginWrapper">
-      <h1 className="projectVM">ProjectVM</h1>
-      <label>
-            <input type="text" placeholder="Username" onChange={(event) => setUsername(event.target.value)} />
-      </label>
-      <br />
-      <label>
-            <input type="text" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
-      </label>
-      <br />
-      <label>
-          <input type="submit" value="LOGIN" id="submitButton" />
-      </label>
-    </form>
+      <div className="mid_background">
+        <h1 className="projectVM">ProjectVM</h1>
+        <form className="loginWrapper">
+        <label>
+              <input type="text" placeholder="Username" onChange={(event) => setUsername(event.target.value)} />
+        </label>
+        <br />
+        <label>
+              <input type="text" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
+        </label>
+        <br />
+        <label>
+            <input type="submit" value="LOGIN" id="submitButton" />
+        </label>
+        </form>
+        <Link to="/signup">Create an account</Link>
+      </div>
     </div>
   );
 };
