@@ -14,13 +14,13 @@
 }
 
 #sidebar {
-  position: absolute;
+  position: relative;
   height: 100vh;
 }
 
 #sidebar .pro-sidebar {
   width: 14vw;
-  min-width: 0;
+  min-width: 270px;
 }
 
 #sidebar .pro-sidebar-inner {
