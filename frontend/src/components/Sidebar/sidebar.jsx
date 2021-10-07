@@ -1,6 +1,9 @@
 //import useState hook
 import React, { useState } from "react";
 
+//import router
+import { Link } from 'react-router-dom';
+
 //import react pro sidebar components
 import {
   ProSidebar,
@@ -15,6 +18,7 @@ import {
 import { FaGem, FaHeart, FaHome, FaSearch} from "react-icons/fa";
 import { BsFillMusicPlayerFill, BsClockHistory, BsUpload } from "react-icons/bs";
 import { HiOutlineLogout } from "react-icons/hi";
+import { BiLogIn } from "react-icons/bi";
 
 //import from react-pro-sidebar module and our custom css
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -22,6 +26,11 @@ import './sidebar.css';
 
 
 function Sidebar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const showsLoginOrLogout = () => {
+    isLoggedIn ? setIsLoggedIn(false) : setIsLoggedIn(true);
+  };
 
   return (
     <div id="sidebar">
@@ -42,12 +51,40 @@ function Sidebar() {
         </SidebarContent>
         <SidebarFooter>
           <Menu>
-            <MenuItem icon={<HiOutlineLogout />}>Log Out</MenuItem>
+            <FooterContent
+              isLoggedIn={isLoggedIn}
+              click={showsLoginOrLogout}
+            />
           </Menu>
         </SidebarFooter>
       </ProSidebar>
     </div>
   );
+}
+
+function FooterContent(props) {
+  if (props.isLoggedIn) {
+
+    return (
+      <div onClick={props.click}>
+        <MenuItem icon={<HiOutlineLogout />} >
+          Log Out
+        </MenuItem>
+      </div>
+    );
+
+  } else {
+
+    return (
+      <div onClick={props.click}>
+        <MenuItem icon={<BiLogIn />} >
+          Log In
+          <Link to="/" />
+        </MenuItem>
+      </div>
+    );
+
+  }
 }
 
 export default Sidebar;
