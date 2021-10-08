@@ -1,8 +1,8 @@
-import SignupForm from "./components/Signup/SignupForm";
+import SignupForm from "./components/Signup/SignupForm.jsx";
+import Homepage from "./components/Homepage/Homepage.jsx";
 import Login from "./components/login.jsx";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import NavBar from "./components/NavBar";
 import { Container, Row, Col, Button } from "reactstrap";
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
       <Router>
         <Route path='/signup' exact component={SignupForm} />
         <Route path='/' exact component={Login} />
+        <Route path='/homepage' exact component={Homepage} />
       </Router>
   );
 }
