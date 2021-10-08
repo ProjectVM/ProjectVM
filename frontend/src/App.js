@@ -1,5 +1,6 @@
 import SignupForm from "./components/Signup/SignupForm";
 import Login from "./components/login.jsx";
+import UploadPage from "./components/Upload/upload";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
@@ -23,6 +24,7 @@ function App() {
       <Router>
         <Route path='/signup' exact component={SignupForm} />
         <Route path='/' exact component={Login} />
+        <Route path='/upload' exact component={UploadPage} />
       </Router>
   );
 }
