@@ -15,11 +15,11 @@ def serve(path):
 
 @app.route('/register_user', methods=['POST'])
 def register():
-    account_information = request.json
-    add_acc(account_information)
-    return {
-        "GET": "YEET"
-    }
+     account_information = request.json
+     add_acc(account_information)
+     return {
+         "GET": "YEET"
+     }
 
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000

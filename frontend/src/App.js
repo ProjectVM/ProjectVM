@@ -8,22 +8,11 @@ import { Container, Row, Col, Button } from "reactstrap";
 function App() {
   const [state, setState] = useState({});
 
-  useEffect(() => {
-    fetch("/api")
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json;
-        }
-      })
-      .then((data) => console.log(data))
-      .then((error) => console.log(error));
-  });
-
   return (
-      <Router>
-        <Route path='/signup' exact component={SignupForm} />
-        <Route path='/' exact component={Login} />
-      </Router>
+    <Router>
+      <Route path="/signup" exact component={SignupForm} />
+      <Route path="/" exact component={Login} />
+    </Router>
   );
 }
 

@@ -15,3 +15,15 @@ def add_acc(account_data):
     # data encryption is done here
     collection.insert_one(account_data)
     return
+
+#get acc from database using the username
+#input is the username of the account
+def get_acc(Username):
+
+    # connect to accoutn data collection
+    collection = db["acc_data"]
+
+    # data encryption is done here
+    for x in collection.find({"username": Username}):
+        print(x)
+    return
