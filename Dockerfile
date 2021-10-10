@@ -18,6 +18,7 @@ COPY . .
 # Download dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN pip install "pymongo[srv]"
 RUN npm install
 #RUN npm build
 
