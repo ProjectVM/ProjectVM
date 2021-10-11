@@ -42,7 +42,10 @@ function Sidebar() {
         </SidebarHeader>
         <SidebarContent>
           <Menu >
-            <MenuItem icon={<FaHome />}>Home</MenuItem>
+            <MenuItem icon={<FaHome />}>
+              Home
+              <Link to = "/"/>
+            </MenuItem>
             <MenuItem icon={<BsUpload />}>Upload</MenuItem>
             <MenuItem icon={<FaSearch />}>Search</MenuItem>
             <MenuItem icon={<BsFillMusicPlayerFill />}>My Channel</MenuItem>
@@ -79,7 +82,7 @@ function FooterContent(props) {
       <div onClick={props.click}>
         <MenuItem icon={<BiLogIn />} >
           Log In
-          <Link to="/" />
+          <Link to="/login" />
         </MenuItem>
       </div>
     );

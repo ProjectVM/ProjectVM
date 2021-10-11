@@ -22,20 +22,34 @@
 .contentWrapper{
     position: relative;
     background-color: rgba(52, 58, 57, 1);
-    top: 10vh;
-    height: 75vh;
+    top: 5vh;
+    height: 82vh;
     width: 77vw;
     border-radius: 30px;
     padding: 2vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.heading{
+    position: relative;
+    /* background-color: black; */
+    display: flex;
 }
 
 .genre{
-    position: relative;
     font-size: 36px;
     color: white;
 }
 
+.viewall{
+    font-size: 36px;
+    color: white;
+    margin-left: auto;
+}
+
 .podcastcontainer{
+    top: 1vw;
     position: relative;
     /* background-color: black; */
     display: flex;

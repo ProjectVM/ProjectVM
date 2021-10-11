@@ -22,8 +22,8 @@ function App() {
   return (
       <Router>
         <Route path='/signup' exact component={SignupForm} />
-        <Route path='/' exact component={Login} />
-        <Route path='/homepage' exact component={Homepage} />
+        <Route path='/login' exact component={Login} />
+        <Route path='/' exact component={Homepage} />
       </Router>
   );
 }
