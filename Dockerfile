@@ -21,7 +21,7 @@ RUN pip install -r requirements.txt
 RUN pip install "pymongo[srv]"
 RUN npm install --legacy-peer-deps
 RUN npm install react-router-dom
+RUN npm install react-icons
 RUN npm install react-pro-sidebar
-
 EXPOSE $PORT
 CMD python server.py $PORT
