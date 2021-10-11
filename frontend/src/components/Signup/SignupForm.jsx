@@ -8,7 +8,7 @@ function SignupForm() {
   const [username, setUsername] = useState("");
 
   const submitUserData = () => {
-    fetch("http://10.84.100.85:5000/register_user", {
+    fetch("/register_user", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
