@@ -19,6 +19,7 @@ import { FaGem, FaHeart, FaHome, FaSearch} from "react-icons/fa";
 import { BsFillMusicPlayerFill, BsClockHistory, BsUpload } from "react-icons/bs";
 import { HiOutlineLogout } from "react-icons/hi";
 import { BiLogIn } from "react-icons/bi";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 //import from react-pro-sidebar module and our custom css
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -50,6 +51,10 @@ function Sidebar() {
             <MenuItem icon={<FaSearch />}>Search</MenuItem>
             <MenuItem icon={<BsFillMusicPlayerFill />}>My Channel</MenuItem>
             <MenuItem icon={<BsClockHistory />}>History</MenuItem>
+            <MenuItem icon={<AiOutlineExclamationCircle />}>
+              About
+              <Link to ="/about"/>
+              </MenuItem>
           </Menu>
         </SidebarContent>
         <SidebarFooter>
