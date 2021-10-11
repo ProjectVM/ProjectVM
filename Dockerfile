@@ -13,14 +13,15 @@ RUN apt-get install -y npm
 
 # Copy all app files into the image
 COPY . .
-#RUN pyvenv venv
-#RUN pyvenv activate venv
+
+
 # Download dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN pip install "pymongo[srv]"
 RUN npm install
-#RUN npm build
+RUN npm install react-router-dom
+RUN npm install react-pro-sidebar --legacy-peer-deps
 
 EXPOSE $PORT
 CMD python server.py $PORT
