@@ -72,7 +72,7 @@ function UploadPage() {
             <p className="subHeaderDes">Description:</p>
             <textarea
               className="textInput"
-              placeholder="Add a description to what you share so that everybody learns more about your music"
+              placeholder="Add a description to what you share so that everybody learns more about your product"
               onChange={writeToDescription}
             />
           </div>
