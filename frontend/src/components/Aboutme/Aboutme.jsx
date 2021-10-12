@@ -9,10 +9,10 @@ function Aboutme(){
             <Sidebar/>
             <div className="aboutme">
                 <h1 className="title">About</h1>
-                <div className="contentWrapper">
-                    <h1 className="description">Description Of ProjectVM:</h1>
+                <div className="contentWrapper_about">
+                    <h1 className="description_VM">Description Of ProjectVM:</h1>
                     <p1 className="text">Provide an unbiased universal platform to anyone and everyone to share groundbreaking ideas, serve valuable knowledge and inspire generations of listeners.</p1>
-                    <h1 className="description">Members:</h1>
+                    <h1 className="description_VM">Members:</h1>
                     {/* yufan */}
                     <div className="introduction">
                         <img src={yufanPic} className="leftPic"></img>
