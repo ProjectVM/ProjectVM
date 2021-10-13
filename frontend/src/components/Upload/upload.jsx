@@ -12,6 +12,21 @@ function UploadPage() {
 
   function submit_confirm(event) {
     event.preventDefault();
+    const picExists = picFile ? true : false;
+    const audioExists = audioFile ? true : false;
+    const catExists = category=="" ? false : true;
+
+    const picMsg = picExists ? "" : " {Cover Picture}";
+    const audioMsg = audioExists ? "" : " {Audio File}";
+    const catMsg = catExists ? "" : " {Category}";
+
+    if (picExists&&audioExists&&catExists) {
+
+      // Send data to the server
+
+    } else {
+      alert(`Please fill out${picMsg}${audioMsg}${catMsg}.`);
+    }
   }
 
   function submit_cancel(event) {
@@ -20,10 +35,18 @@ function UploadPage() {
     history.push(path);
   }
 
+  function picFileNameOrEmpty() {
+    return picFile&&picFile.name ? picFile.name : "";
+  }
+
   function uploadPic(event) {
     const coverPic = event.target.files[0];
     setPicFile(coverPic);
     console.log(coverPic);
+  }
+
+  function audioFileNameOrEmpty() {
+    return audioFile&&audioFile.name ? audioFile.name : "";
   }
 
   function uploadAudio(event) {
@@ -60,9 +83,9 @@ function UploadPage() {
           <div className="selectMenu">
             <img className="coverPic" alt="Cover Picture" src={picFile ? URL.createObjectURL(picFile) : ""} />
             <div className="selectFromMenu">
-              <UploadFile name="Cover Picture" file={picFile&&picFile.name ? picFile.name : null} method={uploadPic} />
-              <UploadFile name="Audio File" file={audioFile&&audioFile.name ? audioFile.name : null} method={uploadAudio} />
-              <ListCategories method={uploadCategory} />
+              <UploadFile name="Cover Picture" file={picFileNameOrEmpty()} method={uploadPic} />
+              <UploadFile name="Audio File" file={audioFileNameOrEmpty()} method={uploadAudio} />
+              <ListCategories name={category} method={uploadCategory} />
             </div>
           </div>
 
@@ -104,11 +127,12 @@ function Button(props) {
 function UploadFile(props) {
   const text = props.name + ":";
   const Id = props.name=="Cover Picture" ? "coverPicFile" : "audioFile";
-  const labelText = props.file==null ? "Browse local files" : props.file;
+  const labelText = props.file=="" ? "Browse local files" : props.file;
   const acceptFileType = props.name=="Cover Picture" ? "image/*" : "audio/*";
 
   return (
     <div className="select">
+      <p className="requiredFieldIndicator">*</p>
       <p className="menuName">{text}</p>
       <label className="text_browser">{labelText}
         <input
@@ -126,18 +150,20 @@ function ListCategories(props) {
 
   return(
     <div className="select">
+      <p className="requiredFieldIndicator">*</p>
       <label className="menuName">Category:</label>
         <input
           list="categories"
           id="category"
           name="category"
+          value={props.name}
           placeholder="Choose a category"
           onChange={props.method}
           className="textAndSelect" />
-        <datalist id="categories">
-          <option value="Focus" />
-          <option value="Relax" />
-        </datalist>
+          <datalist id="categories">
+            <option value="Focus" />
+            <option value="Relax" />
+          </datalist>
     </div>
   );
 }
