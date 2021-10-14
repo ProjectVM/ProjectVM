@@ -21,7 +21,7 @@ RUN pip install -r requirements.txt
 RUN pip install "pymongo[srv]"
 RUN npm install
 
-WORKDIR /frontend
+WORKDIR /frontend/build
 EXPOSE $PORT
 CMD npm start
 #RUN npm build
