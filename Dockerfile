@@ -19,11 +19,14 @@ COPY . .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN pip install "pymongo[srv]"
+#RUN npm install
+#RUN npm install react-router-dom
+#RUN npm install react-icons
+
+WORKDIR /frontend/
 RUN npm install
 RUN npm install react-router-dom
 RUN npm install react-icons
-
-WORKDIR /frontend/
 EXPOSE $PORT
 CMD npm start
 #RUN npm build
