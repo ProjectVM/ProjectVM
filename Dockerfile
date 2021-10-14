@@ -24,7 +24,7 @@ RUN pip install "pymongo[srv]"
 
 WORKDIR /root/frontend
 RUN npm install
-RUN npm build
+#RUN npm build
 EXPOSE $PORT
 WORKDIR /root
 CMD ./my_wrapper_script.sh
