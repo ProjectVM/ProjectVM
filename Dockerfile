@@ -23,7 +23,7 @@ RUN pip install "pymongo[srv]"
 #RUN npm install react-router-dom
 #RUN npm install react-icons
 
-WORKDIR /frontend/
+WORKDIR /root/frontend
 RUN npm install
 RUN npm install react-router-dom
 RUN npm install react-icons
