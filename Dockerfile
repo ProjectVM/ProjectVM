@@ -26,7 +26,8 @@ WORKDIR /root/frontend
 RUN npm install
 RUN npm build
 EXPOSE $PORT
-CMD npm start
+WORKDIR /root
+CMD ./my_wrapper_script.sh
 
 #EXPOSE $PORT
 #CMD python server.py $PORT

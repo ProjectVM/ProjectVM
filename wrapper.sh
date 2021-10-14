@@ -4,10 +4,10 @@
 set -m
 
 # Start the primary process and put it in the background
-./server.py $PORT
+./server.py $PORT &
 
-cd frontend
 # Start the helper process
+cd frontend
 npm start
 
 # the my_helper_process might need to know how to wait on the
