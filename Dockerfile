@@ -24,12 +24,10 @@ RUN pip install "pymongo[srv]"
 
 WORKDIR /root/frontend
 RUN npm install
-RUN npm install react-router-dom
-RUN npm install react-icons
+RUN npm build
 EXPOSE $PORT
-#CMD npm start
-#RUN npm build
+CMD npm start
 
 #EXPOSE $PORT
 #CMD python server.py $PORT
-CMD ./wrapper.sh
+#CMD ./wrapper.sh
