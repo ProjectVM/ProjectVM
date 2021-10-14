@@ -20,7 +20,11 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN pip install "pymongo[srv]"
 RUN npm install
+
+WORKDIR /frontend
+EXPOSE $PORT
+CMD npm start
 #RUN npm build
 
-EXPOSE $PORT
-CMD python server.py $PORT
+#EXPOSE $PORT
+#CMD python server.py $PORT
