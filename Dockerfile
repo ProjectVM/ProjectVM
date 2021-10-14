@@ -30,4 +30,3 @@ CMD npm start
 
 #EXPOSE $PORT
 #CMD python server.py $PORT
-#CMD ./wrapper.sh
