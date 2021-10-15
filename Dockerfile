@@ -27,7 +27,7 @@ RUN npm install
 #RUN npm build
 EXPOSE $PORT
 WORKDIR /root
-CMD ./my_wrapper_script.sh
+CMD ./wrapper.sh
 
 #EXPOSE $PORT
 #CMD python server.py $PORT
