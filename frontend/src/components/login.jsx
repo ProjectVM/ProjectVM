@@ -16,7 +16,7 @@ function LoginForm() {
         </label>
         <br />
         <label>
-              <input type="text" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
+              <input type="password" name="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
         </label>
         <br />
         <label>

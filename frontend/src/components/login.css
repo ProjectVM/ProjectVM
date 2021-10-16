@@ -45,6 +45,19 @@ input[type=text]:focus{
   border: 2px solid #555;
 }
 
+input[type=password]{
+    height: 6vh;
+  width: 25vw;
+  padding-left: 14px;
+  border-radius: 14px;
+
+}
+
+input[type=password]:focus{
+  border: 2px solid #555;
+}
+
+
 #submitButton{
   width: 12vw;
   color: white;
