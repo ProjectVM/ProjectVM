@@ -27,10 +27,13 @@ def register():
     if len(list(get_acc_with_username(username))) == 0 and check_password_strength(passw):
         insert = {"email": email, "username": username,"password": encrypt_passw(passw)}
         add_acc(insert)
-
+        return {
+            "MSG": "200"
+        }
     return {
-         "GET": "YEET"
+         "MSG": "400"
      }
+     
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
     app.run(debug=False,host='0.0.0.0',port=port)
