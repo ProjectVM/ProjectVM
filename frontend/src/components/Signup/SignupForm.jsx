@@ -46,6 +46,7 @@ function SignupForm() {
             value={email}
           ></input>
           <input
+            type="password"
             className="Input"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
