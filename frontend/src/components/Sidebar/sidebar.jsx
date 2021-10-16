@@ -1,5 +1,5 @@
 //import useState hook
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //import router
 import { Link } from 'react-router-dom';
@@ -26,11 +26,23 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import './sidebar.css';
 
 
-function Sidebar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Sidebar(props) {
+  const name = sessionStorage.getItem("username");
+  const [username, setUsername] = useState(name);
+  const [isLoggedIn, setIsLoggedIn] = useState(name ? true : false);
+
+  useEffect(() => {
+    setUsername(sessionStorage.getItem("username"));
+  });
 
   const showsLoginOrLogout = () => {
-    isLoggedIn ? setIsLoggedIn(false) : setIsLoggedIn(true);
+    if (isLoggedIn) {
+      sessionStorage.removeItem("username");
+      setIsLoggedIn(false);
+    } else {
+      setUsername("");
+      setIsLoggedIn(true);
+    }
   };
 
   return (
@@ -59,6 +71,7 @@ function Sidebar() {
         </SidebarContent>
         <SidebarFooter>
           <Menu>
+            <ShowUsername username={username} />
             <FooterContent
               isLoggedIn={isLoggedIn}
               click={showsLoginOrLogout}
@@ -68,6 +81,19 @@ function Sidebar() {
       </ProSidebar>
     </div>
   );
+}
+
+function ShowUsername(props) {
+  if (props.username) {
+
+    return (
+      <MenuItem className="usernameOnSidebar">
+        {props.username}
+      </MenuItem>
+    );
+  } else {
+    return <p />;
+  }
 }
 
 function FooterContent(props) {

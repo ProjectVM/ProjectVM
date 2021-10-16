@@ -6,7 +6,7 @@ function Homepage(){
 
     return (
         <div className="background">
-            <Sidebar/>
+          <Sidebar />
             <div className="homepage">
                 <h1 className="title">Home</h1>
                 <div className="contentWrapper">

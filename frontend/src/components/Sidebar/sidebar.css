@@ -38,3 +38,7 @@
   color: rgba(38, 70, 83, 0.9);
   font-size: 30px;
 }
+
+.usernameOnSidebar {
+  padding-left: 45px;
+}

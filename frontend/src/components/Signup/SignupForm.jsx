@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Redirect } from "react-router";
 import "./Signup.css";
 
 function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [msg, setMsg] = useState("");
 
   const submitUserData = () => {
     fetch("/register_user", {
@@ -21,7 +23,9 @@ function SignupForm() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        const message = data.MSG; // 200 for success and 400 for failure
+        setMsg(message);
+        console.log(data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -33,6 +37,7 @@ function SignupForm() {
       <div className="Container">
         <div className="Contents">
           <h1 className="CreateAccount">Create Account</h1>
+          <Warning msg={msg} username={username} />
           <input
             className="Input"
             placeholder="Username"
@@ -59,6 +64,28 @@ function SignupForm() {
       </div>
     </div>
   );
+}
+
+function Warning(props) {
+  if (props.msg) {
+    if (props.msg == "200") {
+      sessionStorage.setItem("username", props.username);
+      return <Redirect to="/" />;
+    }
+    else if (props.msg == "400") {
+      return (
+        <p className="warning">
+          Incorrect account information, please try again.
+        </p>
+      );
+    }
+    else {
+      return <p>Can not recognize the number sent from server</p>;
+    }
+  }
+  else {
+    return <p />;
+  }
 }
 
 export default SignupForm;
