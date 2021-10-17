@@ -19,8 +19,6 @@ function LoginForm() {
     })
       .then((response) => response.json())
       .then((data) => {
-        const message = data.MSG; // 200 for success and 400 for failure
-        setMsg(message);
         console.log(data);
       })
       .catch((error) => {
