@@ -5,13 +5,14 @@ set -m
 
 # Start the primary process and put it in the background
 cd frontend
-npm install -g serve
-serve -s build &
+npm start
+# npm install -g serve
+# serve -s build -l $(PORT) &
 
 
 # Start the helper process
 cd ..
-python server.py
+python server.py 5000
 
 # the my_helper_process might need to know how to wait on the
 # primary process to start before it does its work and returns
