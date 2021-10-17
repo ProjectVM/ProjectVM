@@ -7,7 +7,7 @@ set -m
 cd frontend
 npm run build
 npm install -g serve
-serve -s build -l 3000 &
+serve -s build -l $(PORT) &
 
 
 # Start the helper process
