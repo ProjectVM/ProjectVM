@@ -5,7 +5,10 @@ set -m
 
 # Start the primary process and put it in the background
 cd frontend
-npm start &
+npm run build
+npm install -g serve
+serve -s build -l 3000 &
+
 
 # Start the helper process
 cd ..
