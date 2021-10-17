@@ -39,11 +39,16 @@ def login():
     login_info = request.json
     username = login_info['username']
     password = login_info['password']
-    print("Login Button was Clicked!")
-    return {
-        "MSG": "200"
+    account = list(get_acc_with_username(username))
+    if(len(account) != 0 and check_hash(password,account[0]['password'])):
+        print("valid")
+        return {
+            "MSG": "200"
+        }
+    return{
+            "MSG": "400"
     }
-     
+  
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
     app.run(debug=False,host='0.0.0.0',port=port)
