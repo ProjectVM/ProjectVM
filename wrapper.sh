@@ -5,9 +5,7 @@ set -m
 
 # Start the primary process and put it in the background
 cd frontend
-npm run build
-npm install -g serve
-serve -s build -l $(PORT) &
+npm start &
 
 
 # Start the helper process
