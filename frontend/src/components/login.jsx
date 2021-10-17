@@ -8,7 +8,8 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
-  const submitLoginData = () => {
+  function submitLoginData(event) {
+    event.preventDefault();
     fetch("/login_user", {
       method: "POST", // or 'PUT'
       headers: {
@@ -35,7 +36,7 @@ function LoginForm() {
     <div className="background">
       <div className="mid_background">
         <h1 className="projectVM">ProjectVM</h1>
-        {/* <form className="loginWrapper"> */}
+        <form className="loginWrapper" onSubmit={submitLoginData}>
           <Login msg={msg} username={username} />
           <label>
             <input
@@ -59,10 +60,9 @@ function LoginForm() {
               type="submit"
               value="LOGIN"
               id="submitButton"
-              onClick={submitLoginData}
             />
           </label>
-        {/* </form> */}
+        </form>
         <Link to="/signup">Create an account</Link>
       </div>
     </div>
