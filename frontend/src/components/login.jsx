@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
+import { Warning } from "./Signup/SignupForm.jsx";
 import "./login.css";
 
 function LoginForm() {
@@ -37,7 +38,11 @@ function LoginForm() {
       <div className="mid_background">
         <h1 className="projectVM">ProjectVM</h1>
         <form className="loginWrapper" onSubmit={submitLoginData}>
-          <Login msg={msg} username={username} />
+          <Warning
+            msg={msg}
+            username={username}
+            textMsg="Incorrect username or password" // Set the warning message here
+          />
           <label>
             <input
               type="text"
@@ -68,21 +73,5 @@ function LoginForm() {
     </div>
   );
 }
-
-function Login(props){
-  if (props.msg) {
-    if (props.msg == "200") {
-      sessionStorage.setItem("username", props.username);
-      return <Redirect to="/" />;
-    }
-    else{
-      return <p>Incorrect username or password</p>
-    }
-  }
-  else{
-    return <p></p>
-  }
-}
-
 
 export default LoginForm;

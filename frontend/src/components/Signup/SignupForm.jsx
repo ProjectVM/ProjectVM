@@ -37,7 +37,11 @@ function SignupForm() {
       <div className="Container">
         <div className="Contents">
           <h1 className="CreateAccount">Create Account</h1>
-          <Warning msg={msg} username={username} />
+          <Warning
+            msg={msg}
+            username={username}
+            textMsg="Incorrect account information, please try again."
+          />
           <input
             className="Input"
             placeholder="Username"
@@ -66,7 +70,7 @@ function SignupForm() {
   );
 }
 
-function Warning(props) {
+export function Warning(props) {
   if (props.msg) {
     if (props.msg == "200") {
       sessionStorage.setItem("username", props.username);
@@ -74,7 +78,7 @@ function Warning(props) {
     } else if (props.msg == "400") {
       return (
         <p className="warning">
-          Incorrect account information, please try again.
+          {props.textMsg}
         </p>
       );
     } else {
