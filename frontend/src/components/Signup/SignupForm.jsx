@@ -71,19 +71,16 @@ function Warning(props) {
     if (props.msg == "200") {
       sessionStorage.setItem("username", props.username);
       return <Redirect to="/" />;
-    }
-    else if (props.msg == "400") {
+    } else if (props.msg == "400") {
       return (
         <p className="warning">
           Incorrect account information, please try again.
         </p>
       );
-    }
-    else {
+    } else {
       return <p>Can not recognize the number sent from server</p>;
     }
-  }
-  else {
+  } else {
     return <p />;
   }
 }
