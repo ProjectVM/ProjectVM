@@ -33,6 +33,16 @@ def register():
     return {
          "MSG": "400"
      }
+
+@app.route('/login_user', methods=['POST'])
+def login():
+    login_info = request.json
+    username = login_info['username']
+    password = login_info['password']
+    print("Login Button was Clicked!")
+    return {
+        "MSG": "200"
+    }
      
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
