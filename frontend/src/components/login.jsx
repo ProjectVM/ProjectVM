@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 import "./login.css";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
 
   const submitLoginData = () => {
     fetch("/login_user", {
@@ -20,6 +22,9 @@ function LoginForm() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        const message = data.MSG; // 200 for success and 400 for failure
+        setMsg(message);
+        console.log(message);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -30,7 +35,8 @@ function LoginForm() {
     <div className="background">
       <div className="mid_background">
         <h1 className="projectVM">ProjectVM</h1>
-        <form className="loginWrapper">
+        {/* <form className="loginWrapper"> */}
+          <Login msg={msg} username={username} />
           <label>
             <input
               type="text"
@@ -56,11 +62,27 @@ function LoginForm() {
               onClick={submitLoginData}
             />
           </label>
-        </form>
+        {/* </form> */}
         <Link to="/signup">Create an account</Link>
       </div>
     </div>
   );
 }
+
+function Login(props){
+  if (props.msg) {
+    if (props.msg == "200") {
+      sessionStorage.setItem("username", props.username);
+      return <Redirect to="/" />;
+    }
+    else{
+      return <p>Incorrect username or password</p>
+    }
+  }
+  else{
+    return <p></p>
+  }
+}
+
 
 export default LoginForm;
