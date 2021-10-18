@@ -11,7 +11,7 @@ function LoginForm() {
 
   function submitLoginData(event) {
     event.preventDefault();
-    fetch("/login_user", {
+    fetch(process.env.REACT_APP_API_PATH + "/login_user", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",

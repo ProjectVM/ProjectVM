@@ -10,7 +10,7 @@ function SignupForm() {
   const [msg, setMsg] = useState("");
 
   const submitUserData = () => {
-    fetch("/register_user", {
+    fetch(process.env.REACT_APP_API_PATH + "/register_user", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
