@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../Sidebar/sidebar.jsx";
 import yufanPic from "./yufan.jpg";
+import qiuhongPic from "./qiuhongPic.jpg";
 import "./Aboutme.css";
 
 function Aboutme() {
@@ -33,6 +34,16 @@ function Aboutme() {
               planning on being a Software Engineering Developer in the future.
               I am passionate about learning more about Data Visualization and
               A.I. tech.
+            </p>
+          </div>
+          {/* Qiuhong */}
+          <div className="introduction">
+            <img src={qiuhongPic} className="leftPic" />
+            <p className="intro_text">
+              Hi, I am Qiuhong. I am a senior at University at Buffalo, pursuing
+              B.S. in Computer Science. I love coding because it brings to me a
+              great sense of accomplishment that comes from solving the problem by
+              programming. In my spare time, I enjoy movies and bodybuilding.
             </p>
           </div>
 
