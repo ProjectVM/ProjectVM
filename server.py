@@ -6,7 +6,7 @@ from flask_cors import CORS, cross_origin #comment this on deployment
 from database import *
 from functions import *
 
-app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+app = Flask(__name__, static_url_path='/', static_folder='./frontend/build')
 CORS(app) #comment this on deployment
 api = Api(app)
 
@@ -16,6 +16,7 @@ def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
 @app.route('/register_user', methods=['POST'])
+@cross_origin()
 def register():
     account_information = request.json
     email = account_information['email']
@@ -35,6 +36,7 @@ def register():
      }
 
 @app.route('/login_user', methods=['POST'])
+@cross_origin()
 def login():
     login_info = request.json
     username = login_info['username']
