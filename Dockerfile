@@ -15,10 +15,8 @@ RUN apt-get install -y npm
 RUN apt-get update && apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
 
-RUN ls -la $HOME
 # Copy all app files into the image
 COPY . /root/
-RUN ls -la $HOME
 
 # Download dependencies
 RUN pip install --upgrade pip
