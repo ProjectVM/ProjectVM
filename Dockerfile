@@ -11,22 +11,20 @@ RUN apt-get update --fix-missing
 RUN apt-get install -y nodejs
 RUN apt-get install -y npm
 
+# Install supervisor
+RUN apt-get update && apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+
+RUN ls -la $HOME
 # Copy all app files into the image
-COPY . .
+COPY . /root/
+RUN ls -la $HOME
 
 # Download dependencies
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install -r $HOME/requirements.txt
 RUN pip install "pymongo[srv]"
-#RUN npm install
-#RUN npm install react-router-dom
-#RUN npm install react-icons
 
-WORKDIR /root/frontend
-RUN npm install
-EXPOSE $PORT
-WORKDIR /root
-CMD bash wrapper.sh
-
-#EXPOSE $PORT
-#CMD python server.py $PORT
+# Expose frontend to Heroku
+EXPOSE 22 5000 $PORT
+CMD ["/usr/bin/supervisord"]
