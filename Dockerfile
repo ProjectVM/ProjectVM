@@ -2,7 +2,7 @@ FROM python:3.8
 
 # Set the home directory to /root
 ENV HOME /root
-
+ENV PORT $PORT
 # cd into the home directory
 WORKDIR /root
 
