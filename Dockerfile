@@ -24,4 +24,4 @@ RUN pip install "pymongo[srv]"
 
 # Expose frontend to Heroku
 EXPOSE 22 $PORT 5000
-CMD ["/usr/bin/supervisord"]
+CMD /usr/bin/supervisord
