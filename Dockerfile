@@ -24,9 +24,10 @@ RUN pip install "pymongo[srv]"
 
 WORKDIR /root/frontend
 RUN npm install
+RUN npm run build
 EXPOSE $PORT
 WORKDIR /root
-CMD bash wrapper.sh
+# CMD bash wrapper.sh
 
 #EXPOSE $PORT
-#CMD python server.py $PORT
+CMD python server.py $PORT
