@@ -10,7 +10,7 @@ function SignupForm() {
   const [msg, setMsg] = useState("");
 
   const submitUserData = () => {
-    fetch(process.env.REACT_APP_API_PATH + "/register_user", {
+    fetch("/register_user", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -76,11 +76,7 @@ export function Warning(props) {
       sessionStorage.setItem("username", props.username);
       return <Redirect to="/" />;
     } else if (props.msg == "400") {
-      return (
-        <p className="warning">
-          {props.textMsg}
-        </p>
-      );
+      return <p className="warning">{props.textMsg}</p>;
     } else {
       return <p>Can not recognize the number sent from server</p>;
     }
