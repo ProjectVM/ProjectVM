@@ -46,7 +46,13 @@ function Aboutme() {
               programming. In my spare time, I enjoy movies and bodybuilding.
             </p>
           </div>
-
+          {/* Vinci Wu */}
+          <div className="introduction">
+            <p className="intro_text">
+              I am Vinci Wu, a senior at University at Buffalo currently pursuing
+              my Bachelors of Science in Computer Science.
+            </p>
+          </div>
           {/* Please follow blow template to do the intro*/}
           {/* <div className="introduction">
                         <img src={ } className="leftPic"></img>

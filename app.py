@@ -1,22 +1,27 @@
-import json
-import sys
+from flask import Flask
 from flask import Flask, send_from_directory, request, redirect
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS, cross_origin #comment this on deployment
 from database import *
 from functions import *
 
-app = Flask(__name__, static_url_path='/', static_folder='./frontend/build')
-CORS(app) #comment this on deployment
-api = Api(app)
+app = Flask(__name__, static_folder='frontend/build', static_url_path='')
+CORS(app)
 
-@app.route("/", defaults={'path':''})
+@app.route('/')
 @cross_origin()
-def serve(path):
-    return send_from_directory(app.static_folder,'index.html')
+def serve():
+    return send_from_directory(app.static_folder, "index.html")
+
+
+@app.route('/api', methods=['GET'])
+@cross_origin()
+def index():
+    return {
+        "MSG" : "400"
+    }
 
 @app.route('/register_user', methods=['POST'])
-@cross_origin()
 def register():
     account_information = request.json
     email = account_information['email']
@@ -36,7 +41,6 @@ def register():
      }
 
 @app.route('/login_user', methods=['POST'])
-@cross_origin()
 def login():
     login_info = request.json
     username = login_info['username']
@@ -50,7 +54,7 @@ def login():
     return{
             "MSG": "400"
     }
-  
+
 if __name__ == '__main__':
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-    app.run(debug=False,host='0.0.0.0',port=port)
+    app.run()
+
