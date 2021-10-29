@@ -1,13 +1,17 @@
 import pymongo
 from pymongo import MongoClient
 import boto3
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # connect to s3
 s3 = boto3.resource(
     service_name='s3',
     region_name='us-east-1',
-    aws_access_key_id='AKIAX7VKNCZFBN7YVE4Z',
-    aws_secret_access_key='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'
+    aws_access_key_id=os.environ.get("AWS_KEY_ID"),
+    aws_secret_access_key=os.environ.get("AWS_SECRET_KEY")
 )
 
 # aws S3 check function
