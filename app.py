@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import Flask, send_from_directory, request, redirect
+from flask import Flask, send_from_directory, request, redirect, url_for
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS, cross_origin #comment this on deployment
 from database import *
@@ -57,6 +57,12 @@ def login():
             "MSG": "400"
     }
 
+@app.route('/upload_audio', methods=['POST'])
+def upload_file():
+    uploaded_file = request.files['file']
+    if uploaded_file.filename != '':
+        uploaded_file.save(uploaded_file.filename)
+    return redirect(url_for('index'))
 if __name__ == '__main__':
     app.run()
 
