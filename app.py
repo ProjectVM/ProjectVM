@@ -82,10 +82,11 @@ def upload_file():
     if request.method == 'POST':
         uploaded_file = request.files['file']  # make sure frontend name is 'file' when doing frontend
         if uploaded_file.filename != '' and upload_file and allowed_file(upload_file.filename):
+            title = request.form['title']
             filename = secure_filename(upload_file.filename)
             uploaded_file.save(uploaded_file.filename)
             s3.upload_file( # incomplete, need current account's s3 Bucket
-                Bucket=' ',
+                Bucket=title, #not sure if this should be title
                 Filename=filename,
                 Key=' '
             )
