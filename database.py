@@ -60,11 +60,12 @@ def add_podcast(username, podcast_name):
     pods_collect = db["acc_pods"]
 
     podcast_file_name = username + "_" + podcast_name
-    # route in s3
+    # route in s3, to store the file at. (unique name is given by combining the username and the name of podcast)
     podcast_location = f"podcasts/{podcast_file_name}.m4a"
+    
 
     podcast_list = pods_collect.find_one({"username": username})['podcasts']
-    podcast_list.append(podcast_file_name)
+    podcast_list.append(podcast_name)
 
     newvalues = { "$set": {"podcasts": podcast_list}}
 
