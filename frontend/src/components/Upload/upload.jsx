@@ -5,6 +5,7 @@ import "./upload.css";
 
 function UploadPage() {
   const[picFile, setPicFile] = useState(null);
+  const[title, setTitle] = useState("");
   const[audioFile, setAudioFile] = useState(null);
   const[category, setCategory] = useState("");
   const[description, setDescription] = useState("");
@@ -14,18 +15,21 @@ function UploadPage() {
     event.preventDefault();
     const picExists = picFile ? true : false;
     const audioExists = audioFile ? true : false;
+    const titleExists = title=="" ? false : true;
     const catExists = category=="" ? false : true;
 
     const picMsg = picExists ? "" : " {Cover Picture}";
     const audioMsg = audioExists ? "" : " {Audio File}";
+    const titleMsg = titleExists ? "" : " {Title}";
     const catMsg = catExists ? "" : " {Category}";
 
-    if (picExists&&audioExists&&catExists) {
+    if (picExists&&audioExists&&titleExists&&catExists) {
 
       // Send data to the server
+      // and redirect to My Channel
 
     } else {
-      alert(`Please fill out${picMsg}${audioMsg}${catMsg}.`);
+      alert(`Please fill out the following field(s):\n${audioMsg}${titleMsg}${picMsg}${catMsg}.`);
     }
   }
 
@@ -33,6 +37,12 @@ function UploadPage() {
     event.preventDefault();
     let path = "/";
     history.push(path);
+  }
+
+  function writeToTitle(event) {
+    const text = event.target.value;
+    setTitle(text);
+    console.log(title);
   }
 
   function picFileNameOrEmpty() {
@@ -77,14 +87,15 @@ function UploadPage() {
       <Sidebar />
       <div className="upload">
 
-        <h1 className="title">Upload</h1>
+        <h1 className="titleUpload">Upload</h1>
         <div className="contentWrapperUpload">
 
           <div className="selectMenu">
             <img className="coverPic" alt="Cover Picture" src={picFile ? URL.createObjectURL(picFile) : ""} />
             <div className="selectFromMenu">
-              <UploadFile name="Cover Picture" file={picFileNameOrEmpty()} method={uploadPic} />
               <UploadFile name="Audio File" file={audioFileNameOrEmpty()} method={uploadAudio} />
+              <Title name={title} method={writeToTitle} />
+              <UploadFile name="Cover Picture" file={picFileNameOrEmpty()} method={uploadPic} />
               <ListCategories name={category} method={uploadCategory} />
             </div>
           </div>
@@ -120,6 +131,25 @@ function Button(props) {
     <form onSubmit={props.submitMethod}>
       <input className="button" id={buttonType} type="submit" value={props.name} />
     </form>
+  );
+}
+
+
+function Title(props) {
+
+  return(
+    <div className="select">
+      <p className="requiredFieldIndicator">*</p>
+      <p className="menuName">Title:</p>
+      <label className="menuName" />
+        <input
+          id="audioTitle"
+          name="audioTitle"
+          value={props.name}
+          placeholder="Enter a title for your audio"
+          onChange={props.method}
+          className="textAndSelect" />
+    </div>
   );
 }
 
