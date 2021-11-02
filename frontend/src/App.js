@@ -1,6 +1,7 @@
 import SignupForm from "./components/Signup/SignupForm.jsx";
 import Homepage from "./components/Homepage/Homepage.jsx";
 import Aboutme from "./components/Aboutme/Aboutme.jsx";
+import Podcast from "./components/Audioplayer/audioplayer.jsx"
 import Login from "./components/login.jsx";
 import Upload from "./components/Upload/upload.jsx";
 import { useState, useEffect } from "react";
@@ -15,7 +16,8 @@ function App() {
       <Route path="/login" exact component={Login} />
       <Route path="/" exact component={Homepage} />
       <Route path="/about" exact component={Aboutme} />
-      <Route path="/upload" exact component={Upload}/>
+      <Route path="/podcast" exact component={Podcast} />
+      <Route path="/upload" exact component={Upload} />
     </Router>
   );
 }
