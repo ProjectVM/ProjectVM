@@ -36,6 +36,19 @@ function UploadPage() {
       data.append('pic', this.picFile);
       data.append('description', this.description);
       data.append('category', this.category);
+
+      fetch("/upload", {
+        method: "POST",
+        body: data,
+      }).then((response) => response.json())
+          .then((data) => {
+            const message = data.MSG; // 200 for success and 400 for failure
+            setMsg(message);
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       // and redirect to My Channel
 
     } else {

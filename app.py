@@ -59,14 +59,7 @@ def login():
         "MSG": "400"
     }
 
-
-'''
-Sources:
-https://flask.palletsprojects.com/en/2.0.x/patterns/fileuploads/
-https://blog.miguelgrinberg.com/post/handling-file-uploads-with-flask
-https://medium.com/aws-pocket/uploading-files-to-aws-s3-with-flask-3d3d213404fb
-'''
-ALLOWED_EXTENSIONS = {'mp3', 'wav'}
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'mp3'])
 app.config['MAX_CONTENT_LENGTH'] = 80 * 1000 * 1000  # set file size limit to 80 Megabytes
 
 
@@ -76,20 +69,10 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/upload_audio', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def upload_file():
-    if request.method == 'POST':
-        uploaded_file = request.files['file']  # make sure frontend name is 'file' when doing frontend
-        if uploaded_file.filename != '' and upload_file and allowed_file(upload_file.filename):
-            title = request.form['title']
-            filename = secure_filename(upload_file.filename)
-            uploaded_file.save(uploaded_file.filename)
-            s3.upload_file( # incomplete, need current account's s3 Bucket
-                Bucket=title, #not sure if this should be title
-                Filename=filename,
-                Key=' '
-            )
-    return redirect(url_for('index')) # once upload is done, return to home page
+    title = request.form['title']
+    print(title) # test for title
 
 
 if __name__ == '__main__':
