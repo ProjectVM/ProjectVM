@@ -35,6 +35,7 @@ def register():
     if len(list(get_acc_with_username(username))) == 0 and check_password_strength(passw):
         insert = {"email": email, "username": username, "password": encrypt_passw(passw)}
         add_acc(insert)
+        create_podcast_list(insert)
         return {
             "MSG": "200"
         }
@@ -45,7 +46,6 @@ def register():
 
 @app.route('/login_user', methods=['POST'])
 def login():
-    aws_check()
     login_info = request.json
     username = login_info['username']
     password = login_info['password']
