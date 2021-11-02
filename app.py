@@ -90,8 +90,13 @@ def upload_file():
             desc_file.close()
             desc_data = open("description.txt", 'rb')
             # send the data to the s3 database
-            add_podcast("sdsds", title, audio_file, pic_file, desc_data)
-
+            add_podcast("tester", title, audio_file, pic_file, desc_data)
+            return {
+            "MSG": "200"
+            }
+    return {
+      "MSG": "400"
+    }
 
 if __name__ == '__main__':
     app.run()
