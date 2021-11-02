@@ -26,16 +26,16 @@ function UploadPage() {
     if (picExists&&audioExists&&titleExists&&catExists) {
 
       // Send data to the server
-      e.preventDefault();
+      // e.preventDefault();
 
       // form containing name, file, picture, description, and category
       const data = new FormData();
 
-      data.append('title', this.title);
-      data.append('audioFile', this.audioFile);
-      data.append('picFile', this.picFile);
-      data.append('description', this.description);
-      data.append('category', this.category);
+      data.append('title', title);
+      data.append('audioFile', audioFile);
+      data.append('picFile', picFile);
+      data.append('description', description);
+      data.append('category', category);
 
       fetch("/upload", {
         method: "POST",

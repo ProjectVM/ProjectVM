@@ -79,7 +79,14 @@ def upload_file():
         if allowed_file(pic_file.filename):
             picname = secure_filename(pic_file.filename)
             description = request.form.get('description')
+            print(title, filename, picname, description)
             # category = request.form.get('category') not needed yet
-
+            audio_data = open(filename, 'rb')
+            pic_data = open(picname, 'rb')
+            desc_file = open("description.txt", "w")
+            n = desc_file.write(description)
+            desc_file.close()
+            desc_data = open("description.txt", 'rb')
+            add_podcast("user", title, audio_data, pic_data, desc_data)
 if __name__ == '__main__':
     app.run()
