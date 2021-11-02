@@ -21,10 +21,12 @@ s3 = boto3.resource(
 cluster = MongoClient("mongodb+srv://nrpatel5:ProjectVM@cluster0.idgc0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = cluster["projectvm"]
 
+
 # adds new account into the database (account information && empty podcast list)
 def add_acc(account_data):
     add_acc_info(account_data)
     return create_podcast_list(account_data)
+
 
 #get acc information from database using the username
 def get_acc_with_username(username):
@@ -53,36 +55,6 @@ def add_podcast(username, podcast_name, podcast_audio_data, podcast_image_data, 
     s3.Bucket(Bucket_Name).put_object(Key=f"podcast_image/{filename}.png", Body=podcast_image_data)
     s3.Bucket(Bucket_Name).put_object(Key=f"podcast_description/{filename}.txt", Body=podcast_description_data)
 
-
-# def display_all_user_podcasts():
-
-
-
-# --------------- helper functions below ------------------
-
-#add new acc to database
-#input is a dictionary of the email, username and password in that order.
-def add_acc_info(account_data):
-    # connect to accoutn data collection
-    collection = db["acc_data"]
-
-    # data encryption is done here
-    collection.insert_one(account_data)
-    return
-
-#create podcast list for user (only occurs one time when account is created)
-#input is a dictionary of the email, username and password in that order.
-def create_podcast_list(account_data):
-
-    # connect to account podcast data collection
-    pods_collect = db["acc_pods"]
-
-    # username = account_data['username']
-    info = {'username': account_data['username'], 'podcasts': []}
-
-    return pods_collect.insert_one(info)
-
-
 #function to delete all traces of the user in the database
 def delete_user(username):
     collection = db["acc_data"]
@@ -100,4 +72,31 @@ def delete_user(username):
     return
 
     
-    
+# def display_all_user_podcasts():
+
+
+
+# --------------- helper functions below ------------------
+
+#add new acc to database
+#input is a dictionary of the email, username and password in that order.
+def add_acc_info(account_data):
+    # connect to accoutn data collection
+    collection = db["acc_data"]
+
+    # data encryption is done here
+    collection.insert_one(account_data)
+    return
+
+
+#create podcast list for user (only occurs one time when account is created)
+#input is a dictionary of the email, username and password in that order.
+def create_podcast_list(account_data):
+
+    # connect to account podcast data collection
+    pods_collect = db["acc_pods"]
+
+    # username = account_data['username']
+    info = {'username': account_data['username'], 'podcasts': []}
+
+    return pods_collect.insert_one(info)
