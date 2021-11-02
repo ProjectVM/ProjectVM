@@ -25,7 +25,19 @@ function UploadPage() {
 
     if (picExists&&audioExists&&titleExists&&catExists) {
 
-      // Send data to the server
+      // form containing name, file, picture, description, and category
+      const data = new FormData();
+
+      data.append('title', title);
+      data.append('audioFile', audioFile);
+      data.append('picFile', picFile);
+      data.append('description', description);
+      data.append('category', category);
+
+      fetch("/upload", {
+        method: "POST",
+        body: data,
+      })
       // and redirect to My Channel
 
     } else {
