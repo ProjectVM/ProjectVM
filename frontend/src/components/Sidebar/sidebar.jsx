@@ -59,7 +59,10 @@ function Sidebar(props) {
               Home
               <Link to = "/"/>
             </MenuItem>
-            <MenuItem icon={<BsUpload />}>Upload</MenuItem>
+            <MenuItem icon={<BsUpload />}>
+              Upload
+              <Link to ="/upload" />
+            </MenuItem>
             <MenuItem icon={<FaSearch />}>Search</MenuItem>
             <MenuItem icon={<BsFillMusicPlayerFill />}>My Channel</MenuItem>
             <MenuItem icon={<BsClockHistory />}>History</MenuItem>

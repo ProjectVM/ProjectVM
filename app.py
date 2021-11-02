@@ -45,7 +45,6 @@ def register():
 
 @app.route('/login_user', methods=['POST'])
 def login():
-    print("head start!")
     aws_check()
     login_info = request.json
     username = login_info['username']
