@@ -59,6 +59,7 @@ def login():
         "MSG": "400"
     }
 
+
 ALLOWED_EXTENSIONS = set(['png', 'mp3'])
 app.config['MAX_CONTENT_LENGTH'] = 80 * 1000 * 1000  # set file size limit to 80 Megabytes
 
@@ -73,20 +74,27 @@ def allowed_file(filename):
 def upload_file():
     title = request.form.get('title')
     audio_file = request.files['audioFile']
+    # check if the files are the allowed format
     if allowed_file(audio_file.filename):
         filename = secure_filename(audio_file.filename)
         pic_file = request.files['picFile']
         if allowed_file(pic_file.filename):
             picname = secure_filename(pic_file.filename)
             description = request.form.get('description')
+            # check that the data is correct
             print(title, filename, picname, description)
             # category = request.form.get('category') not needed yet
+            # convert files to data
             audio_data = open(filename, 'rb')
             pic_data = open(picname, 'rb')
+            # write the description into a txt file
             desc_file = open("description.txt", "w")
             n = desc_file.write(description)
             desc_file.close()
             desc_data = open("description.txt", 'rb')
+            # send the data to the s3 database
             add_podcast("user", title, audio_data, pic_data, desc_data)
+
+
 if __name__ == '__main__':
     app.run()
