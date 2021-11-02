@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../Sidebar/sidebar.jsx"
 import "./Homepage.css";
 
@@ -15,8 +16,7 @@ function Homepage(){
                         <h1 className="viewall">View all</h1>
                     </div>
                     <div className="podcastcontainer">
-                        <div className="podcast"></div>
-                        <div className="podcast"></div>
+                        <Link to="/podcast" className="podcast"></Link>
                     </div>
                 </div>
             </div>
