@@ -25,9 +25,6 @@ function UploadPage() {
 
     if (picExists&&audioExists&&titleExists&&catExists) {
 
-      // Send data to the server
-      // e.preventDefault();
-
       // form containing name, file, picture, description, and category
       const data = new FormData();
 

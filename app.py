@@ -85,15 +85,13 @@ def upload_file():
             print(title, filename, picname, description)
             # category = request.form.get('category') not needed yet
             # convert files to data
-            audio_data = open(filename, 'rb')
-            pic_data = open(picname, 'rb')
             # write the description into a txt file
             desc_file = open("description.txt", "w")
             n = desc_file.write(description)
             desc_file.close()
             desc_data = open("description.txt", 'rb')
             # send the data to the s3 database
-            add_podcast("user", title, audio_data, pic_data, desc_data)
+            add_podcast("sdsds", title, audio_file, pic_file, desc_data)
 
 
 if __name__ == '__main__':
