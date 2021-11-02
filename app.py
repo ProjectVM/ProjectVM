@@ -59,7 +59,7 @@ def login():
         "MSG": "400"
     }
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'mp3', 'wav'])
+ALLOWED_EXTENSIONS = set(['png', 'mp3'])
 app.config['MAX_CONTENT_LENGTH'] = 80 * 1000 * 1000  # set file size limit to 80 Megabytes
 
 
@@ -73,11 +73,13 @@ def allowed_file(filename):
 def upload_file():
     title = request.form.get('title')
     audio_file = request.files['audioFile']
-    filename = secure_filename(audio_file.filename)
-    pic_file = request.files['picFile']
-    picname = secure_filename(pic_file.filename)
-    description = request.form.get('description')
-    # category = request.form.get('category') not needed yet
+    if allowed_file(audio_file.filename):
+        filename = secure_filename(audio_file.filename)
+        pic_file = request.files['picFile']
+        if allowed_file(pic_file.filename):
+            picname = secure_filename(pic_file.filename)
+            description = request.form.get('description')
+            # category = request.form.get('category') not needed yet
 
 if __name__ == '__main__':
     app.run()
