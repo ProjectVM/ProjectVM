@@ -33,7 +33,6 @@ def register():
     if len(list(get_acc_with_username(username))) == 0 and check_password_strength(passw):
         insert = {"email": email, "username": username,"password": encrypt_passw(passw)}
         add_acc(insert)
-        create_podcast_list(insert)
         return {
             "MSG": "200"
         }
