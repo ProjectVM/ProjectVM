@@ -43,7 +43,6 @@ def register():
 
 @app.route('/login_user', methods=['POST'])
 def login():
-    aws_check()
     login_info = request.json
     username = login_info['username']
     password = login_info['password']
