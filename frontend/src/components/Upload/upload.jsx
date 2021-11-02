@@ -32,23 +32,15 @@ function UploadPage() {
       const data = new FormData();
 
       data.append('title', this.title);
-      data.append('file', this.audioFile);
-      data.append('pic', this.picFile);
+      data.append('audioFile', this.audioFile);
+      data.append('picFile', this.picFile);
       data.append('description', this.description);
       data.append('category', this.category);
 
       fetch("/upload", {
         method: "POST",
         body: data,
-      }).then((response) => response.json())
-          .then((data) => {
-            const message = data.MSG; // 200 for success and 400 for failure
-            setMsg(message);
-            console.log(data);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+      })
       // and redirect to My Channel
 
     } else {
