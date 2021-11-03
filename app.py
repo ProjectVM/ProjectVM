@@ -71,6 +71,7 @@ def allowed_file(filename):
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    username = request.form.get('username')
     title = request.form.get('title')
     audio_file = request.files['audioFile']
     # check if the files are the allowed format
@@ -90,7 +91,7 @@ def upload_file():
             desc_file.close()
             desc_data = open("description.txt", 'rb')
             # send the data to the s3 database
-            add_podcast("tester", title, audio_file, pic_file, desc_data)
+            add_podcast(username, title, audio_file, pic_file, desc_data)
             return {
             "MSG": "200"
             }

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { Redirect } from "react-router";
 import Sidebar from "../Sidebar/sidebar";
 import "./upload.css";
 
 function UploadPage() {
+  const name = sessionStorage.getItem("username");
+  const[username, setUsername] = useState(name);
   const[picFile, setPicFile] = useState(null);
   const[title, setTitle] = useState("");
   const[audioFile, setAudioFile] = useState(null);
@@ -13,35 +16,53 @@ function UploadPage() {
 
   function submit_confirm(event) {
     event.preventDefault();
+    const usernameExists = username ? true : false;
     const picExists = picFile ? true : false;
     const audioExists = audioFile ? true : false;
     const titleExists = title=="" ? false : true;
     const catExists = category=="" ? false : true;
 
+    const usernameMsg = usernameExists ? "" : " {Please Log In First}";
     const picMsg = picExists ? "" : " {Cover Picture}";
     const audioMsg = audioExists ? "" : " {Audio File}";
     const titleMsg = titleExists ? "" : " {Title}";
     const catMsg = catExists ? "" : " {Category}";
 
-    if (picExists&&audioExists&&titleExists&&catExists) {
+    const requiredFieldsExist = usernameExists&&picExists&&audioExists&&titleExists&&catExists;
+    if (requiredFieldsExist) {
 
       // form containing name, file, picture, description, and category
       const data = new FormData();
 
+      data.append('username', username);
       data.append('title', title);
       data.append('audioFile', audioFile);
       data.append('picFile', picFile);
       data.append('description', description);
       data.append('category', category);
+      
 
       fetch("/upload", {
         method: "POST",
         body: data,
       })
+        .then((response) => response.json())
+        .then((data) => {
+          const message = data.MSG;
+          console.log(data);
+          // Redirect to Home page for now
+          if(message=="200") {
+            let path = "/";
+            history.push(path);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
       // and redirect to My Channel
 
     } else {
-      alert(`Please fill out the following field(s):\n${audioMsg}${titleMsg}${picMsg}${catMsg}.`);
+      alert(`Please fill out the following field(s):\n${usernameMsg}${audioMsg}${titleMsg}${picMsg}${catMsg}.`);
     }
   }
 
