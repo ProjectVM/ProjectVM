@@ -50,6 +50,7 @@ def login():
     password = login_info['password']
     account = list(get_acc_with_username(username))
     if (len(account) != 0 and check_hash(password, account[0]['password'])):
+        # print(download_audio_file(username, "WackMusic"))
         print("valid")
         return {
             "MSG": "200"
