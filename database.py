@@ -84,25 +84,29 @@ def delete_user(username):
     
 #function that returns the audio file, image, and description 
 #input is the username and podcast name
-audiopath = "audiopods/"
-def download_audio_file(username, podcast_name):
-    filename = username + '_' + podcast_name
-    if not os.path.exists(audiopath):
-        os.makedirs(audiopath)    
-    path_total = audiopath + filename + ".mp3"
-    return s3.meta.client.download_file(Bucket_Name,f"podcast_audio/{filename}.mp3", f"{path_total}")
+# audiopath = "audiopods/"
+# def download_audio_file(username, podcast_name):
+#     filename = username + '_' + podcast_name
+#     if not os.path.exists(audiopath):
+#         os.makedirs(audiopath)    
+#     path_total = audiopath + filename + ".mp3"
+#     return s3.meta.client.download_file(Bucket_Name,f"podcast_audio/{filename}.mp3", f"{path_total}")
 
-imagepath = "images"
-def get_image_file(username, podcast_name):
-    filename = username + '_' + podcast_name
-    if not os.path.exists(imagepath):
-        os.makedirs(imagepath)    
-    path_total = imagepath + filename + ".png"
-    return s3.meta.client.download_file(Bucket_Name, f"podcast_image/{filename}.png", f"{imagepath}")
+# imagepath = "images"
+# def get_image_file(username, podcast_name):
+#     filename = username + '_' + podcast_name
+#     if not os.path.exists(imagepath):
+#         os.makedirs(imagepath)    
+#     path_total = imagepath + filename + ".png"
+#     return s3.meta.client.download_file(Bucket_Name, f"podcast_image/{filename}.png", f"{imagepath}")
+
+def get_audio_file(username, podcast_name):
+    filename = username + "_" + podcast_name
+    return s3_client.get_object(Bucket=Bucket_Name, Key=f"podcast_audio/{filename}.mp3")
+
 
 def get_image_file_with_filename(filename):
     return s3.Bucket(Bucket_Name).get_object(Key=f"podcast_image/{filename}.png")
-
 
 def get_description_file(username, podcast_name):
     filename = username + '_' + podcast_name
@@ -111,14 +115,6 @@ def get_description_file(username, podcast_name):
 def get_description_file_with_filename(filename):
     return s3.Bucket(Bucket_Name).get_object(Key=f"podcast_description/{filename}.png")
 
-
-def get_all_audio_files():
-    return_list = {}
-    list_of_pods = s3.Bucket(Bucket_Name).objects.filter(Prefix=f"podcast_audio/")
-    for obj in list_of_pods:
-        return_list[obj.key] = get_audio_file_with_filename(obj.key)
-    print(return_list)
-    return return_list
 
 
 # --------------- helper functions below ------------------
