@@ -67,13 +67,16 @@ function Podcasts(props) {
     const podcastList = [];
     console.log(audioNameList);
     console.log(usernameArray);
+
+    // Construct a [fileName, audioName] list
     usernameArray.forEach(username => {
       const audioList = audioNameList[username];
 
       audioList.forEach(audioName => {
         if (audioName) {
           const fileName = username + "_" + audioName;
-          podcastList.push(fileName);
+          const namesArray = [fileName, audioName];
+          podcastList.push(namesArray);
         }
 
       });
@@ -82,9 +85,8 @@ function Podcasts(props) {
 
     return (
       <div className="podcastcontainer">
-        {podcastList.map(fileName => {
-          const strArray = fileName.split("_");
-          const audioName = strArray[strArray.length - 1];
+        {podcastList.map(namesArray => {
+          const [fileName, audioName] = namesArray;
           return <SinglePodcast fileName = {fileName} audioName = {audioName} />;
         })}
         
