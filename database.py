@@ -44,7 +44,7 @@ def get_acc_with_username(username):
 #add podcast to podcast list, including the image and the description into s3
 
 #to use add_podcast you must pass the podcast_audio_data, podcast_image_data, podcast_description_data which should be
-#done in app.py before calling this function. So the data has to be ready to be put into s3 when put into this function. 
+#done in app.py before calling this function. So the data has to be ready to be put into s3 when put into this function.
 def add_podcast(username, podcast_name, podcast_audio_data, podcast_image_data, podcast_description_data):
     # add information to the database (add podcast into list of owned podcasts)
     pods_collect = db["acc_pods"]
@@ -81,13 +81,25 @@ def delete_user(username):
     pods_collect.remove({"username": username})
     return
 
-    
 
 # returns a dictionaries of {"username" : [podcastname#1, podastname#2, ..] , ....}
 def get_all_audiofile_information():
     #list to put information in
     return_list = {}
 
+    pods_collect = db["acc_pods"]
+    pod_details = pods_collect.find()
+    
+    for info in pod_details:
+        username = info["username"]
+        podcast_list = []
+        
+        for podcast in info["podcasts"]:
+            podcast_list.append(podcast)
+        return_list[username] = podcast_list
+
+    return return_list
+        
     #iterate through mongodb acc_pods
         #var username = username
         #list podcast_list = []

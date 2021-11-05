@@ -54,7 +54,7 @@ def login():
         return {
             "MSG": "200"
         }
-    get_audio_file("neel1028", "WackMusic")['Body']
+    
     return {
         "MSG": "400"
     }
@@ -98,6 +98,14 @@ def upload_file():
             }
     return {
       "MSG": "400"
+    }
+
+@app.route('/podcasts', methods=['GET'])
+def get_audiofile_information():
+    info_list = get_all_audiofile_information()
+    print(info_list)
+    return {
+        "info_list" : info_list
     }
 
 if __name__ == '__main__':
