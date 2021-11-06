@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./audioplayer.css"
 import Sidebar from "../Sidebar/sidebar.jsx";
-import soundfile from "./Sample.mp3"
-import pic from "./SamplePic.png"
 
 
 function Podcast(props){
-    //hardcord version
-    const [podcastname, setPodcastname] = useState("Brooks");
-    const [picFile, setPicFile] = useState(pic);
-    const [description, setDescription] = useState("Classical piano music played by Kai Engel.");
-    const [audioFile, setAudioFile] = useState(soundfile);
+    const [podcastname, setPodcastname] = useState("");
+    const [username, setUsername] = useState("");
+    const [picUrl, setPicUrl] = useState("");
+    const [description, setDescription] = useState("");
+    const [audioUrl, setAudioUrl] = useState("");
     const [category, setCategory] = useState("");
     const [comment, setComment] = useState("");
 
@@ -21,18 +19,32 @@ function Podcast(props){
         console.log(comment);
     }
 
+    useEffect(() => {
+        setUsername(props.location.state.username);
+        setPodcastname(props.location.state.audioName);
+
+        const fileName = props.location.state.fileName;
+    
+        const s3_img_url = "https://cse442-projectvm.s3.amazonaws.com/podcast_image/" + fileName + ".png";
+        const s3_audio_url = "https://cse442-projectvm.s3.amazonaws.com/podcast_audio/" + fileName + ".mp3";
+        // const s3_des_url = "https://cse442-projectvm.s3.amazonaws.com/podcast_description/" + fileName + ".txt";
+
+        setPicUrl(s3_img_url);
+        setAudioUrl(s3_audio_url);
+        // setDescription(s3_des_url);
+
+    })
+
     return (
         <div className="podcast_background">
             <Sidebar/>
             <div className="audioplayer">
                 <h1 className="title_podcast">{podcastname}</h1>
                 <div className="infor">
-                    {/* hardcord version */}
-                    <img className="coverPic_podcast" alt="Cover Picture" src={picFile ? picFile : ""}/>
-                    {/* <image className="coverPic_podcast" alt="Cover Picture" src={picFile ? URL.createObjectURL(picFile) : ""}/> */}
+                    <image className="coverPic_podcast" alt="Cover Picture" src={picUrl}/>
                     <p1 className="description_podcast">Description: {description}</p1>
                 </div>
-                <AudioPlayer src={audioFile}/>
+                <AudioPlayer src={audioUrl}/>
                 <div className="commentWrapper_podcast">
                     <div className="comment_title">Comment:</div>
                     <textarea
