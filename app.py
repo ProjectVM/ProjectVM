@@ -54,7 +54,7 @@ def login():
         return {
             "MSG": "200"
         }
-    
+    get_audio_file_url('yufansun_Brooks')
     return {
         "MSG": "400"
     }

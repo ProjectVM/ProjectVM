@@ -100,12 +100,34 @@ def get_all_audiofile_information():
 
     return return_list
         
-    #iterate through mongodb acc_pods
-        #var username = username
-        #list podcast_list = []
-        #iterate over Array containing the podcasts (for i in array)
-            #podcast_list += i
-        #return_list[username] = podcast_list
+
+def get_audio_file_url(filename):
+    key = "podcast_audio/" + filename + ".mp3"
+    url = s3_client.generate_presigned_url(
+    ClientMethod='get_object', 
+    Params={'Bucket': Bucket_Name, 'Key': key},
+    ExpiresIn=3600)
+    return url
+
+def get_image_file_url(filename):
+    key = "podcast_image/" + filename + ".png"
+    image_url = s3_client.generate_presigned_url(
+    ClientMethod='get_object', 
+    Params={'Bucket': Bucket_Name, 'Key': key},
+    ExpiresIn=3600)
+    return image_url
+
+def get_desc_file_text(filename):
+    return_string = ""
+
+    key = "podcast_description/" + filename + ".txt"
+    image_url = s3_client.generate_presigned_url(
+    ClientMethod='get_object', 
+    Params={'Bucket': Bucket_Name, 'Key': key},
+    ExpiresIn=3600)
+
+    return return_string
+
 
 
 # def get_audio_file(username, podcast_name):

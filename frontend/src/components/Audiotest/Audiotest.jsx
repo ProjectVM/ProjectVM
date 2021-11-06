@@ -9,7 +9,7 @@ function AudioFilePlayer(props) {
   let name = props.name;
   let id = props.id;
   let s3_url =
-    "https://cse442-projectvm.s3.amazonaws.com/podcast_audio/neel1028_WackMusic.mp3";
+    "https://cse442-projectvm.s3.amazonaws.com/podcast_audio/yufansun_Brooks.mp3?AWSAccessKeyId=AKIAX7VKNCZFMBVD4UF7&Signature=VPHTdYq36ytnfulaoaZwZd136Og%3D&Expires=1636226532";
 
   const handleAudioPlay = (s3_url_link, state) => {
     var audio = new Audio(s3_url_link);
