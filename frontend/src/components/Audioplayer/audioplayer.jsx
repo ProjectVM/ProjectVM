@@ -5,7 +5,7 @@ import soundfile from "./Sample.mp3"
 import pic from "./SamplePic.png"
 
 
-function Podcast(){
+function Podcast(props){
     //hardcord version
     const [podcastname, setPodcastname] = useState("Brooks");
     const [picFile, setPicFile] = useState(pic);

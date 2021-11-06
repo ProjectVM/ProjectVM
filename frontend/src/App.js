@@ -18,7 +18,7 @@ function App() {
       <Route path="/" exact component={Homepage} />
       <Route path="/testing" exact component={Audiotest} />
       <Route path="/about" exact component={Aboutme} />
-      <Route path="/podcast" exact component={Podcast} />
+      <Route path="/podcast/:fileName" exact component={Podcast} />
       <Route path="/upload" exact component={Upload} />
     </Router>
   );

@@ -75,7 +75,7 @@ function Podcasts(props) {
       audioList.forEach(audioName => {
         if (audioName) {
           const fileName = username + "_" + audioName;
-          const namesArray = [fileName, audioName];
+          const namesArray = [fileName, audioName, username];
           podcastList.push(namesArray);
         }
 
@@ -86,10 +86,13 @@ function Podcasts(props) {
     return (
       <div className="podcastcontainer">
         {podcastList.map(namesArray => {
-          const [fileName, audioName] = namesArray;
-          return <SinglePodcast fileName = {fileName} audioName = {audioName} />;
+          const [fileName, audioName, username] = namesArray;
+          return <SinglePodcast
+                   fileName = {fileName}
+                   audioName = {audioName}
+                   username={username}
+                 />;
         })}
-        
       </div>
     );
   } else {
@@ -99,13 +102,32 @@ function Podcasts(props) {
 
 function SinglePodcast(props) {
   const fileName = props.fileName;
+  const audioName = props.audioName;
+  const username = props.username;
   const s3_url = "https://cse442-projectvm.s3.amazonaws.com/podcast_image/" + fileName + ".png";
   console.log(s3_url);
 
   return (
-    <div className="singlePodcast">
+    <div >
+      <Link className="singlePodcast" to={{
+        pathname: `podcast/${fileName}`,
+        state: {
+          fileName: `${fileName}`,
+          audioName: `${audioName}`,
+          username: `${username}`,
+        }
+      }}>
       <img className="coverPicPodcast" alt="Cover Picture" src={s3_url}/>
-      <p>{props.audioName}</p>
+      <p>{audioName}</p>
+      <Link to={{
+        pathname: `podcast/${fileName}`,
+        state: {
+          fileName: `${fileName}`,
+          audioName: `${audioName}`,
+          username: `${username}`,
+        }
+      }}/>
+      </Link>
     </div>
   );
 }
