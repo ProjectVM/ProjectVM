@@ -29,7 +29,8 @@ def register():
     email = account_information['email']
     username = account_information['username']
     passw = account_information['password']
-    print(email, username, passw)
+
+    username = cleanInput(username)
 
     # checks username is in database and if the password is strong.
     if len(list(get_acc_with_username(username))) == 0 and check_password_strength(passw):
@@ -48,6 +49,9 @@ def login():
     login_info = request.json
     username = login_info['username']
     password = login_info['password']
+
+    username = cleanInput(username)
+    
     account = list(get_acc_with_username(username))
     if (len(account) != 0 and check_hash(password, account[0]['password'])):
         print("valid")
