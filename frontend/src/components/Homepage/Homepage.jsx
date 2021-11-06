@@ -119,14 +119,6 @@ function SinglePodcast(props) {
       }}>
       <img className="coverPicPodcast" alt="Cover Picture" src={s3_url}/>
       <p>{audioName}</p>
-      <Link to={{
-        pathname: `podcast/${fileName}`,
-        state: {
-          fileName: `${fileName}`,
-          audioName: `${audioName}`,
-          username: `${username}`,
-        }
-      }}/>
       </Link>
     </div>
   );
