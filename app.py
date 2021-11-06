@@ -108,5 +108,17 @@ def get_audiofile_information():
         "info_list" : info_list
     }
 
+@app.route('/podcastUrl', methods=['POST'])
+def get_podcastUrl():
+    filename = request.form.get('fileName')
+    audioUrl = get_audio_file_url(filename)
+    imageUrl = get_image_file_url(filename)
+    return {
+        "audioUrl" : audioUrl,
+        "picUrl" : imageUrl
+    }
+
+
+
 if __name__ == '__main__':
     app.run()

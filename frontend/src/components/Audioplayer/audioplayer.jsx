@@ -24,15 +24,24 @@ function Podcast(props){
         setPodcastname(props.location.state.audioName);
 
         const fileName = props.location.state.fileName;
-    
-        const s3_img_url = "https://cse442-projectvm.s3.amazonaws.com/podcast_image/" + fileName + ".png";
-        const s3_audio_url = "https://cse442-projectvm.s3.amazonaws.com/podcast_audio/" + fileName + ".mp3";
-        // const s3_des_url = "https://cse442-projectvm.s3.amazonaws.com/podcast_description/" + fileName + ".txt";
 
-        setPicUrl(s3_img_url);
-        setAudioUrl(s3_audio_url);
-        // setDescription(s3_des_url);
+        const data = new FormData();
+        data.append('fileName', fileName);
 
+        fetch("/podcastUrl",{
+            method: "POST",
+            body: data,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setPicUrl(data.picUrl);
+                setAudioUrl(data.audioUrl);
+                // setDescription(s3_des_url);
+
+            })
+            .catch((error) => {
+                console.error("Error", error);
+            })
     })
 
     return (
@@ -41,7 +50,7 @@ function Podcast(props){
             <div className="audioplayer">
                 <h1 className="title_podcast">{podcastname}</h1>
                 <div className="infor">
-                    <image className="coverPic_podcast" alt="Cover Picture" src={picUrl}/>
+                    <img className="coverPic_podcast" alt="Cover Picture" src={picUrl}/>
                     <p1 className="description_podcast">Description: {description}</p1>
                 </div>
                 <AudioPlayer src={audioUrl}/>
@@ -60,10 +69,8 @@ function Podcast(props){
 }
 
 function AudioPlayer(props) {
-    const source = props.src==null ? "" : props.src;
-    //hardcord version
-    const urlObj = source=="" ? "" : source;
-    // const urlObj = source=="" ? "" : URL.createObjectURL(source);
+    const source = props.src;
+    const urlObj = source;
   
     return (
       <figure className="audioWrapper_podcast">

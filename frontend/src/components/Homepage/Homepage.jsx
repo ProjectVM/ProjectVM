@@ -101,11 +101,29 @@ function Podcasts(props) {
 }
 
 function SinglePodcast(props) {
+  const [picUrl, setPicUrl] = useState("");
+
   const fileName = props.fileName;
   const audioName = props.audioName;
   const username = props.username;
-  const s3_url = "https://cse442-projectvm.s3.amazonaws.com/podcast_image/" + fileName + ".png";
-  console.log(s3_url);
+
+  const data = new FormData();
+  data.append('fileName', fileName);
+
+  useEffect(() => {
+    
+    fetch("/podcastUrl", {
+        method: "POST",
+        body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+          setPicUrl(data.picUrl);
+      })
+      .catch((error) => {
+          console.error("Error", error);
+      })
+  })
 
   return (
     <div >
@@ -117,11 +135,12 @@ function SinglePodcast(props) {
           username: `${username}`,
         }
       }}>
-      <img className="coverPicPodcast" alt="Cover Picture" src={s3_url}/>
+      <img className="coverPicPodcast" alt="Cover Picture" src={picUrl}/>
       <p>{audioName}</p>
       </Link>
     </div>
   );
 }
+
 
 export default Homepage;
