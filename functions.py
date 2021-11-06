@@ -24,3 +24,7 @@ def encrypt_passw(passw):
 #compare password with hashed password
 def check_hash(passw,hash):
     return bcrypt.checkpw(passw.encode(), hash)
+
+def cleanInput(str):
+    return str.replace('&', "&amp;").replace('<', "&lt;").replace('>', "&gt;")
+    

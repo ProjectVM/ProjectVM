@@ -53,6 +53,13 @@ function Aboutme() {
               my Bachelors of Science in Computer Science.
             </p>
           </div>
+          {/* Anthony Morales */}
+          <div className="introduction">
+            <p className="intro_text">
+              I am Anthony Morales, a senior at University at Buffalo pursuing
+              my Bachelors of Science in Computer Science. My hobbies are soccer, rugby, and playing chess.
+            </p>
+          </div>
           {/* Please follow blow template to do the intro*/}
           {/* <div className="introduction">
                         <img src={ } className="leftPic"></img>
