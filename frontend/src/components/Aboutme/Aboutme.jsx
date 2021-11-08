@@ -11,13 +11,13 @@ function Aboutme() {
       <div className="aboutme">
         <h1 className="title">About</h1>
         <div className="contentWrapper_about">
-          <h1 className="description">Description Of ProjectVM:</h1>
+          <h1 className="descriptionVM">Description Of ProjectVM:</h1>
           <p1 className="text">
             Provide an unbiased universal platform to anyone and everyone to
             share groundbreaking ideas, serve valuable knowledge and inspire
             generations of listeners.
           </p1>
-          <h1 className="description">Members:</h1>
+          <h1 className="descriptionVM">Members:</h1>
           {/* yufan */}
           <div className="introduction">
             <img src={yufanPic} className="leftPic"></img>
@@ -46,7 +46,20 @@ function Aboutme() {
               programming. In my spare time, I enjoy movies and bodybuilding.
             </p>
           </div>
-
+          {/* Vinci Wu */}
+          <div className="introduction">
+            <p className="intro_text">
+              I am Vinci Wu, a senior at University at Buffalo currently pursuing
+              my Bachelors of Science in Computer Science.
+            </p>
+          </div>
+          {/* Anthony Morales */}
+          <div className="introduction">
+            <p className="intro_text">
+              I am Anthony Morales, a senior at University at Buffalo pursuing
+              my Bachelors of Science in Computer Science. My hobbies are soccer, rugby, and playing chess.
+            </p>
+          </div>
           {/* Please follow blow template to do the intro*/}
           {/* <div className="introduction">
                         <img src={ } className="leftPic"></img>

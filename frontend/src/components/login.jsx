@@ -11,7 +11,7 @@ function LoginForm() {
 
   function submitLoginData(event) {
     event.preventDefault();
-    fetch(process.env.REACT_APP_API_PATH + "/login_user", {
+    fetch("/login_user", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,7 @@ function LoginForm() {
       .catch((error) => {
         console.error("Error:", error);
       });
-  };
+  }
 
   return (
     <div className="background">
@@ -61,11 +61,7 @@ function LoginForm() {
           </label>
           <br />
           <label>
-            <input
-              type="submit"
-              value="LOGIN"
-              id="submitButton"
-            />
+            <input type="submit" value="LOGIN" id="submitButton" />
           </label>
         </form>
         <Link to="/signup">Create an account</Link>

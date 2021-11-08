@@ -35,6 +35,14 @@ function Sidebar(props) {
     setUsername(sessionStorage.getItem("username"));
   });
 
+  const loginToUpload = () => {
+    if (isLoggedIn) {
+      return;
+    } else {
+      alert("Please log in first to upload.");
+    }
+  };
+
   const showsLoginOrLogout = () => {
     if (isLoggedIn) {
       sessionStorage.removeItem("username");
@@ -59,7 +67,7 @@ function Sidebar(props) {
               Home
               <Link to = "/"/>
             </MenuItem>
-            <MenuItem icon={<BsUpload />}>Upload</MenuItem>
+            <UploadOrLogin isLoggedIn={isLoggedIn} click={loginToUpload} />
             <MenuItem icon={<FaSearch />}>Search</MenuItem>
             <MenuItem icon={<BsFillMusicPlayerFill />}>My Channel</MenuItem>
             <MenuItem icon={<BsClockHistory />}>History</MenuItem>
@@ -81,6 +89,28 @@ function Sidebar(props) {
       </ProSidebar>
     </div>
   );
+}
+
+function UploadOrLogin(props) {
+  if (props.isLoggedIn) {
+
+    return (
+      <MenuItem icon={<BsUpload />}>
+        Upload
+        <Link to ="/upload" />
+      </MenuItem>
+    );
+  } else {
+
+    return (
+      <div onClick={props.click}>
+        <MenuItem icon={<BsUpload />}>
+          Upload
+          <Link to ="/login" />
+        </MenuItem>
+      </div>
+    );
+  }
 }
 
 function ShowUsername(props) {
