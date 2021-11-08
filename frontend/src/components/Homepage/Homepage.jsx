@@ -38,7 +38,7 @@ function Homepage(){
         <div className="background">
           <Sidebar />
             <div className="homepage">
-                <h1 className="title">Home</h1>
+                <h1 className="title_homepage">Home</h1>
                 <div className="contentWrapper">
                     <div className="heading">
                         <h1 className="genre">Genre</h1>
