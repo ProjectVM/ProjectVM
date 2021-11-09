@@ -1,0 +1,60 @@
+.background {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(38, 70, 83, 0.9);
+  display: flex;
+  position: absolute;
+}
+
+.myChannel {
+  position: relative;
+  left: 2vw;
+}
+
+.title_myChannel {
+  position: relative;
+  font-size: 64px;
+  color: white;
+  text-shadow: 5px 5px rgba(38, 70, 83, 0.9);
+  margin: 2vw 0;
+}
+
+.contentWrapper {
+  position: relative;
+  background-color: rgba(52, 58, 57, 1);
+  height: 72vh;
+  width: 73vw;
+  border-radius: 30px;
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-size: 36px;
+  display: flex;
+  margin-bottom: 1vw;
+  justify-content: flex-start;
+}
+
+.playlist {
+  font-size: 36px;
+  color: white;
+  margin: 0;
+}
+
+.uploadButtonMyChannel {
+  display: flex;
+  font-size: 24px;
+  color: white;
+  background-color: rgba(57, 104, 96, 1);
+  border: none;
+  border-radius: 20px;
+  padding: 0.8vw;
+  margin-left: auto;
+}
+
+.uploadButtonMyChannel:hover {
+  color: rgba(57, 255, 96, 1);
+  cursor: pointer;
+}
