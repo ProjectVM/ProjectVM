@@ -81,6 +81,19 @@ def delete_user(username):
     pods_collect.remove({"username": username})
     return
 
+# get all podcasts a user uploaded {"username" : [podcastname#1, podastname#2, ..]}
+def get_audiofile_list(username):
+    return_list = {}
+    filename_list = []
+
+    pods_collect = db["acc_pods"]
+    podcast_list = pods_collect.find_one({"username": username})['podcasts']
+    
+    for filename in podcast_list:
+        filename_list.append(filename)
+        
+    return_list[username] = filename_list
+    return return_list
 
 # returns a dictionaries of {"username" : [podcastname#1, podastname#2, ..] , ....}
 def get_all_audiofile_information():
