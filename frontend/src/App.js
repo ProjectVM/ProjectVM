@@ -5,6 +5,7 @@ import Podcast from "./components/Audioplayer/audioplayer.jsx";
 import Login from "./components/login.jsx";
 import Upload from "./components/Upload/upload.jsx";
 import Audiotest from "./components/Audiotest/Audiotest.jsx";
+import Search from "./components/Search/Search.jsx";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container, Row, Col, Button } from "reactstrap";
@@ -20,6 +21,7 @@ function App() {
       <Route path="/about" exact component={Aboutme} />
       <Route path="/podcast/:fileName" exact component={Podcast} />
       <Route path="/upload" exact component={Upload} />
+      <Route path="/search" exact component={Search} />
     </Router>
   );
 }
