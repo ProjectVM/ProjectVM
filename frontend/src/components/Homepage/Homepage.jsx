@@ -131,7 +131,7 @@ export function SinglePodcast(props) {
         }
       }}>
       <img className="coverPicPodcast" alt="Cover Picture" src={picUrl}/>
-      <p>{audioName}</p>
+      <p className="podcastName">{audioName}</p>
       </Link>
     </div>
   );

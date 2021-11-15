@@ -58,3 +58,25 @@
   color: rgba(57, 255, 96, 1);
   cursor: pointer;
 }
+
+.podcastContainer {
+    top: 1vw;
+    position: relative;
+    display: flex;
+    gap: 4vw;
+}
+
+.onePodcast {
+  display: flex;
+}
+
+.delete_button {
+  color:white;
+  cursor: pointer;
+  font-size: 30pt;
+  margin-left: -40px;
+}
+
+.delete_button:hover {
+  color: red;
+}

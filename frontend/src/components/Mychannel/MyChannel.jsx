@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Sidebar from "../Sidebar/sidebar.jsx";
-import { Podcasts, SinglePodcast } from "../Homepage/Homepage.jsx";
+import { SinglePodcast } from "../Homepage/Homepage.jsx";
+import { TiDelete } from "react-icons/ti";
 import "./MyChannel.css";
 
 function MyChannel() {
@@ -62,7 +63,7 @@ function MyChannel() {
               Upload
             </button>
           </div>
-          <Podcasts
+          <Podcasts_MyChannel
             error = {audioNameListError}
             isLoaded = {audioNameListIsLoaded}
             audioNameList = {audioNameList}
@@ -71,6 +72,55 @@ function MyChannel() {
       </div>
     </div>
   );
+}
+
+function Podcasts_MyChannel(props) {
+  if (props.error) {
+    return <p>Error: {props.error}</p>;
+  } else if (!props.isLoaded) {
+    return <p>Loading...</p>;
+  } else if (props.audioNameList) {
+
+    const audioNameList = props.audioNameList;
+    const usernameArray = Object.keys(props.audioNameList);
+    const podcastList = [];
+
+    // Construct a [fileName, audioName] list
+    usernameArray.forEach(username => {
+      const audioList = audioNameList[username];
+
+      audioList.forEach(audioName => {
+        if (audioName) {
+          const fileName = username + "_" + audioName;
+          const namesArray = [fileName, audioName, username];
+          podcastList.push(namesArray);
+        }
+
+      });
+
+    });
+
+    return (
+      <div className="podcastContainer">
+        {podcastList.map(namesArray => {
+          const [fileName, audioName, username] = namesArray;
+          return (
+            <div className="onePodcast">
+              <SinglePodcast
+                   key = {fileName}
+                   fileName = {fileName}
+                   audioName = {audioName}
+                   username={username}
+              />
+              <TiDelete className="delete_button" />
+            </div>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return <p>No podcasts yet, upload one!</p>;
+  }
 }
 
 export default MyChannel;
