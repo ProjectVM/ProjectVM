@@ -43,6 +43,14 @@ function Sidebar(props) {
     }
   };
 
+  const loginToMyChannel = () => {
+    if (isLoggedIn) {
+      return;
+    } else {
+      alert("Please log in first to access your channel.");
+    }
+  };
+
   const showsLoginOrLogout = () => {
     if (isLoggedIn) {
       sessionStorage.removeItem("username");
@@ -72,7 +80,7 @@ function Sidebar(props) {
               Search
               <Link to = "/search" />
             </MenuItem>
-            <MenuItem icon={<BsFillMusicPlayerFill />}>My Channel</MenuItem>
+            <MyChannelOrLogin isLoggedIn={isLoggedIn} click={loginToMyChannel} />
             <MenuItem icon={<BsClockHistory />}>History</MenuItem>
             <MenuItem icon={<AiOutlineExclamationCircle />}>
               About
@@ -109,6 +117,28 @@ function UploadOrLogin(props) {
       <div onClick={props.click}>
         <MenuItem icon={<BsUpload />}>
           Upload
+          <Link to ="/login" />
+        </MenuItem>
+      </div>
+    );
+  }
+}
+
+function MyChannelOrLogin(props) {
+  if (props.isLoggedIn) {
+
+    return (
+      <MenuItem icon={<BsFillMusicPlayerFill />}>
+        My Channel
+        <Link to ="/mychannel" />
+      </MenuItem>
+    );
+  } else {
+
+    return (
+      <div onClick={props.click}>
+        <MenuItem icon={<BsFillMusicPlayerFill />}>
+          My Channel
           <Link to ="/login" />
         </MenuItem>
       </div>
