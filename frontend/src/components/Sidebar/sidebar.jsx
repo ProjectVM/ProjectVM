@@ -76,7 +76,10 @@ function Sidebar(props) {
               <Link to = "/"/>
             </MenuItem>
             <UploadOrLogin isLoggedIn={isLoggedIn} click={loginToUpload} />
-            <MenuItem icon={<FaSearch />}>Search</MenuItem>
+            <MenuItem icon={<FaSearch />}>
+              Search
+              <Link to = "/search" />
+            </MenuItem>
             <MyChannelOrLogin isLoggedIn={isLoggedIn} click={loginToMyChannel} />
             <MenuItem icon={<BsClockHistory />}>History</MenuItem>
             <MenuItem icon={<AiOutlineExclamationCircle />}>
