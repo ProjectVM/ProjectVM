@@ -30,10 +30,6 @@ function Homepage(){
     
   }, );
 
-  useEffect(() => {
-    console.log(audioNameList);
-  }, [audioNameList]);
-
     return (
         <div className="background">
           <Sidebar />
@@ -55,7 +51,7 @@ function Homepage(){
     );
 }
 
-function Podcasts(props) {
+export function Podcasts(props) {
   if (props.error) {
     return <p>Error: {props.error}</p>;
   } else if (!props.isLoaded) {
@@ -65,8 +61,6 @@ function Podcasts(props) {
     const audioNameList = props.audioNameList;
     const usernameArray = Object.keys(props.audioNameList);
     const podcastList = [];
-    console.log(audioNameList);
-    console.log(usernameArray);
 
     // Construct a [fileName, audioName] list
     usernameArray.forEach(username => {
@@ -88,6 +82,7 @@ function Podcasts(props) {
         {podcastList.map(namesArray => {
           const [fileName, audioName, username] = namesArray;
           return <SinglePodcast
+                   key = {fileName}
                    fileName = {fileName}
                    audioName = {audioName}
                    username={username}
@@ -100,7 +95,7 @@ function Podcasts(props) {
   }
 }
 
-function SinglePodcast(props) {
+export function SinglePodcast(props) {
   const [picUrl, setPicUrl] = useState("");
 
   const fileName = props.fileName;
@@ -122,8 +117,8 @@ function SinglePodcast(props) {
       })
       .catch((error) => {
           console.error("Error", error);
-      })
-  })
+      });
+  });
 
   return (
     <div >
@@ -136,7 +131,7 @@ function SinglePodcast(props) {
         }
       }}>
       <img className="coverPicPodcast" alt="Cover Picture" src={picUrl}/>
-      <p>{audioName}</p>
+      <p className="podcastName">{audioName}</p>
       </Link>
     </div>
   );
