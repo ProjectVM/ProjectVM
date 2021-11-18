@@ -104,6 +104,10 @@ def upload_file():
       "MSG": "400"
     }
 
+@app.route('/search', methods=['GET'])
+def search_by_user():
+    username_search = request.form.get('search')
+
 @app.route('/podcasts', methods=['GET'])
 def get_audiofile_information():
     info_list = get_all_audiofile_information()
