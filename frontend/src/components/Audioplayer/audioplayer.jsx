@@ -36,7 +36,7 @@ function Podcast(props){
             .then((data) => {
                 setPicUrl(data.picUrl);
                 setAudioUrl(data.audioUrl);
-                // setDescription(s3_des_url);
+                setDescription(data.description);
 
             })
             .catch((error) => {
