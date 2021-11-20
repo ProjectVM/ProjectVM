@@ -137,6 +137,15 @@ def get_podcastUrl():
         "description" : descript
     }
 
+@app.route('/delete_pod', methods=['POST'])
+def delete_pod():
+    username = request.form.get('username')
+    podcast_name = request.form.get('podcast_name')
+    delete_podcast(username, podcast_name)
+    return {
+        "status" : 200
+    }
+
 
 
 if __name__ == '__main__':
