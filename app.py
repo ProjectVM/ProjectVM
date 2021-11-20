@@ -126,9 +126,11 @@ def get_podcastUrl():
     filename = request.form.get('fileName')
     audioUrl = get_audio_file_url(filename)
     imageUrl = get_image_file_url(filename)
+    descript = get_desc_file_text(filename)
     return {
         "audioUrl" : audioUrl,
-        "picUrl" : imageUrl
+        "picUrl" : imageUrl,
+        "description" : descript
     }
 
 
