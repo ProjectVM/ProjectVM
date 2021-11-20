@@ -66,20 +66,38 @@ def add_podcast(username, podcast_name, podcast_audio_data, podcast_image_data, 
     s3.Bucket(Bucket_Name).put_object(Key=f"podcast_description/{filename}.txt", Body=podcast_description_data)
 
 #function to delete all traces of the user in the database
-def delete_user(username):
-    collection = db["acc_data"]
+# def delete_user(username):
+#     collection = db["acc_data"]
+#     pods_collect = db["acc_pods"]
+
+#     podcast_list = pods_collect.find_one({"username": username})['podcasts']
+
+#     for i in podcast_list:
+#         s3.Bucket(Bucket_Name).delete_object(Key=f"podcast_audio/{i}.mp3")
+#         s3.Bucket(Bucket_Name).delete_object(Key=f"podcast_image/{i}.png")
+#         s3.Bucket(Bucket_Name).delete_object(Key=f"podcast_description/{i}.txt")
+
+#     collection.remove({"username": username})
+#     pods_collect.remove({"username": username})
+#     return
+
+# delete specific podcast 
+def delete_podcast(username, podcast_name):
+    filename = username + '_' + podcast_name
+
+    #remove it from s3
+    s3.Object(Bucket_Name, f"podcast_audio/{filename}.mp3").delete()
+    s3.Object(Bucket_Name, f"podcast_image/{filename}.png").delete()
+    s3.Object(Bucket_Name, f"podcast_description/{filename}.txt").delete()
+
+    #remove it from database
     pods_collect = db["acc_pods"]
-
     podcast_list = pods_collect.find_one({"username": username})['podcasts']
+    podcast_list.remove(podcast_name)
+    newvalues = { "$set": {"podcasts": podcast_list}}
+    pods_collect.update_one({"username": username}, newvalues)
+    return podcast_list
 
-    for i in podcast_list:
-        s3.Bucket(Bucket_Name).delete_object(Key=f"podcast_audio/{i}.mp3")
-        s3.Bucket(Bucket_Name).delete_object(Key=f"podcast_image/{i}.png")
-        s3.Bucket(Bucket_Name).delete_object(Key=f"podcast_description/{i}.txt")
-
-    collection.remove({"username": username})
-    pods_collect.remove({"username": username})
-    return
 
 # get all podcasts a user uploaded {"username" : [podcastname#1, podastname#2, ..]}
 def get_audiofile_list(username):
