@@ -7,6 +7,36 @@ import "./Search.css";
 function Search(){
     const [search, setSearch] = useState("");
     // const []
+    // Taken from MyChannel as it is very similar
+    const [audioNameList, setAudioNameList] = useState(null);
+    const [audioNameListIsLoaded, setAudioNameListIsLoaded] = useState(false);
+    const [audioNameListError, setAudioNameListError] = useState("");
+
+    useEffect( () => {
+        const data = new FormData();
+        data.append('username', search); // search term is a username
+
+        fetch("/search", {
+            method: "POST",
+            body: data,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const infoList = data.info_list;
+                console.log(infoList);
+
+                if (!audioNameList) {
+                    setAudioNameList(infoList);
+                    setAudioNameListIsLoaded(true);
+                }
+
+            }, error => {
+                setAudioNameListError(error);
+                setAudioNameListIsLoaded(true);
+            })
+            .catch(error => console.log(error));
+    }, );
+
     return (
         <div className="background_search">
           <Sidebar />
