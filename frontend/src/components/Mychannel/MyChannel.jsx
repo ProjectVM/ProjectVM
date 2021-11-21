@@ -12,18 +12,17 @@ function MyChannel() {
   const [audioNameListError, setAudioNameListError] = useState("");
   const history = useHistory();
   
+  // Load the audio list from database
   useEffect(() => {
     const name = sessionStorage.getItem("username");
     setUsername(name);
-    console.log(name);
 
     const data = new FormData();
     data.append('username', name);
 
-    
     fetch("/podcasts", {
       method: "POST",
-      body: data,
+     body: data,
     })
       .then((response) => response.json())
       .then((data) => {
@@ -43,6 +42,7 @@ function MyChannel() {
     
   });
 
+  // The upload button directs users to the Upload page
   function uploadButtonClicked() {
     let path = "/upload";
     history.push(path);
@@ -75,44 +75,119 @@ function MyChannel() {
 }
 
 function Podcasts_MyChannel(props) {
-  if (props.error) {
-    return <p>Error: {props.error}</p>;
-  } else if (!props.isLoaded) {
-    return <p>Loading...</p>;
-  } else if (props.audioNameList) {
+  const [podcastList, setPodcastList] = useState([]);
 
+  useEffect(() => {
+    if (props.audioNameList) {
+      constructList(props.audioNameList);
+    }
+  });
+
+  // Construct a [fileName, audioName, username] list
+  function constructList(audioList) {
     const audioNameList = props.audioNameList;
     const usernameArray = Object.keys(props.audioNameList);
-    const podcastList = [];
-
-    // Construct a [fileName, audioName] list
     usernameArray.forEach(username => {
       const audioList = audioNameList[username];
 
       audioList.forEach(audioName => {
         if (audioName) {
           const fileName = username + "_" + audioName;
-          const namesArray = [fileName, audioName, username];
-          podcastList.push(namesArray);
+          const namesArray = Array.of(fileName, audioName, username);
+          const newList = podcastList;
+
+          if (!isIncludedIn(newList, namesArray)) {
+            newList.push(namesArray);
+            setPodcastList(newList);
+          }
+
         }
-
       });
-
     });
+  }
+
+  // Return true if the audio file already existed, false otherwise.
+  function isIncludedIn(array, names) {
+    if (array) {
+      const [fileName] = names;
+      var bool = false;
+      for (let namesArray of array) {
+        const [anotherFileName] = namesArray;
+        if (anotherFileName == fileName) {
+          bool = true;
+        }
+      }
+      return bool;
+
+    } else {
+      return false;
+    }
+  }
+
+  if (props.error) {
+    return <p>Error: {props.error}</p>;
+  } else if (!props.isLoaded) {
+    return <p>Loading...</p>;
+  } else if (props.audioNameList) {
+    
+    // Remove the audio from both the database and the list stored in front end
+    function deletePodcast (fileName, username, audioName) {
+      const data = new FormData();
+
+      data.append('username', username);
+      data.append('podcast_name', audioName);
+      var newList = podcastList;
+      newList = deleteFrom(newList, fileName);
+      setPodcastList(newList);
+
+      fetch("/delete_pod", {
+        method: "POST",
+        body: data,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const status = data.status;
+          console.log(data);
+          if (status == 200) {
+            var newList = podcastList;
+            newList = deleteFrom(newList, fileName);
+            setPodcastList(newList);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+
+    // Remove the audio from the list stored in front end
+    function deleteFrom(array, filename) {
+      if (array) {
+        return array.filter(names => {
+          const [fileName] = names;
+          return fileName != filename;
+        });
+      } else {
+        return [];
+      }
+    }
 
     return (
       <div className="podcastContainer">
         {podcastList.map(namesArray => {
           const [fileName, audioName, username] = namesArray;
           return (
-            <div className="onePodcast">
+            <div key={`${fileName}_podcast`} className="onePodcast">
               <SinglePodcast
-                   key = {fileName}
-                   fileName = {fileName}
-                   audioName = {audioName}
+                   key={`${fileName}_cover`}
+                   fileName={fileName}
+                   audioName={audioName}
                    username={username}
               />
-              <TiDelete className="delete_button" />
+              <TiDelete
+                key={`${fileName}_delete`}
+                className="delete_button"
+                onClick={() => deletePodcast(fileName, username, audioName)}
+              />
             </div>
           );
         })}
