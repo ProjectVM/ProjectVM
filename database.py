@@ -151,14 +151,14 @@ def get_image_file_url(filename):
 def get_desc_file_text(filename):
     return_string = ""
 
-    key = "podcast_description/" + filename + ".txt"
-    image_url = s3_client.generate_presigned_url(
-    ClientMethod='get_object', 
-    Params={'Bucket': Bucket_Name, 'Key': key},
-    ExpiresIn=3600)
-    des = open(image_url, "r")
-    return_string = des.read()
-    des.close()
+    #key = "podcast_description/" + filename + ".txt"
+    #image_url = s3_client.generate_presigned_url(
+    #ClientMethod='get_object',
+    #Params={'Bucket': Bucket_Name, 'Key': key},
+    #ExpiresIn=3600)
+    #des = open(image_url, "r")
+    #return_string = des.read()
+    #des.close()
     return return_string
 
 
