@@ -150,7 +150,6 @@ def get_image_file_url(filename):
 
 def get_desc_file_text(filename):
     return_string = ""
-
     #key = "podcast_description/" + filename + ".txt"
     #image_url = s3_client.generate_presigned_url(
     #ClientMethod='get_object',
@@ -159,7 +158,9 @@ def get_desc_file_text(filename):
     #des = open(image_url, "r")
     #return_string = des.read()
     #des.close()
-    return return_string
+    res = s3_client.get_object(Bucket=Bucket_Name, Key=f"podcast_description/{filename}.txt")
+    print(res["Body"].read().decode('utf-8'))
+    return res["Body"].read().decode('utf-8')
 
 
 
