@@ -8,7 +8,7 @@
 
 .aboutme{
     position: relative;
-    left: 3vw;
+    left: 2vw;
 }
 
 .title{
@@ -16,15 +16,15 @@
     font-size: 64px;
     color: white;
     text-shadow: 5px 5px rgba(38, 70, 83, 0.9);
+    margin: 2vw 0;
 }
 
 .contentWrapper_about{
     position: relative;
     overflow-y: scroll;
     background-color: rgba(52, 58, 57, 1);
-    top: 5vh;
-    height: 82vh;
-    width: 77vw;
+    height: 72vh;
+    width: 73vw;
     border-radius: 30px;
     padding: 2vw;
     display: flex;

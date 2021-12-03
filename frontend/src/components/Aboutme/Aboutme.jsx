@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Sidebar from "../Sidebar/sidebar.jsx";
-import yufanPic from "./yufan.jpg";
-import qiuhongPic from "./qiuhongPic.jpg";
 import "./Aboutme.css";
 
 function Aboutme() {
@@ -20,7 +18,6 @@ function Aboutme() {
           <h1 className="descriptionVM">Members:</h1>
           {/* yufan */}
           <div className="introduction">
-            <img src={yufanPic} className="leftPic"></img>
             <p className="intro_text">
               Hi, I am Yufan. I am a Senior Computer Science student at UB.
               Computer Science is something I am passionate about. I have some
@@ -38,7 +35,6 @@ function Aboutme() {
           </div>
           {/* Qiuhong */}
           <div className="introduction">
-            <img src={qiuhongPic} className="leftPic" />
             <p className="intro_text">
               Hi, I am Qiuhong. I am a senior at University at Buffalo, pursuing
               B.S. in Computer Science. I love coding because it brings to me a
@@ -67,11 +63,6 @@ function Aboutme() {
 				B.S. in Computer Science.
 			</p>
           </div>
-          {/* Please follow blow template to do the intro*/}
-          {/* <div className="introduction">
-                        <img src={ } className="leftPic"></img>
-                        <p className="intro_text"> </p>
-                    </div> */}
         </div>
       </div>
     </div>
