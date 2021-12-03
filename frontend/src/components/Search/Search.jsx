@@ -6,36 +6,49 @@ import "./Search.css";
 
 function Search(){
     const [search, setSearch] = useState("");
-    // const []
-    // Taken from MyChannel as it is very similar
+    const [user, setUsername] = useState("");
+
     const [audioNameList, setAudioNameList] = useState(null);
     const [audioNameListIsLoaded, setAudioNameListIsLoaded] = useState(false);
-    const [audioNameListError, setAudioNameListError] = useState("");
+    const [clikercheck, setClicker] = useState(false);
 
-    useEffect( () => {
-        const data = new FormData();
-        data.append('username', search); // search term is a username
+    useEffect(() => {
+        if (clikercheck){
+        if (search != ""){
+            const data = new FormData();
+            data.append('username', search); // search term is a username
 
-        fetch("/search", {
-            method: "POST",
-            body: data,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                const infoList = data.info_list;
-                console.log(infoList);
-
-                if (!audioNameList) {
-                    setAudioNameList(infoList);
-                    setAudioNameListIsLoaded(true);
-                }
-
-            }, error => {
-                setAudioNameListError(error);
-                setAudioNameListIsLoaded(true);
+            fetch("/podcasts", {
+                method: "POST",
+                body: data,
             })
-            .catch(error => console.log(error));
-    }, );
+                .then((response) => response.json())
+                .then((data) => {
+                    const infoList = data.info_list;
+                    console.log(infoList);
+
+                    if (!audioNameList) {
+                        setAudioNameList(infoList);
+                        setAudioNameListIsLoaded(true);
+                        setUsername(search);
+                    }
+
+                }, error => {        
+                    alert("Wrong username");
+                })
+                .catch(error => console.log(error));
+        }
+        else{
+            alert("Please type any username");
+        }
+        }
+    }, [user, audioNameListIsLoaded, audioNameList, clikercheck])
+
+    const search_user = () => {
+        setUsername("");
+        setAudioNameList(null);
+        setClicker(true);
+    };
 
     return (
         <div className="background_search">
@@ -49,23 +62,103 @@ function Search(){
                             placeholder=""
                             onChange={(e) => setSearch(e.target.value)}
                             value={search} ></input>
-                        <FaSearch className="icon"/>
+                        <FaSearch className="icon" onClick={search_user}/>
                     </div>
 
                 </div>
                 <div className="contentWrapper_search">
-                    {/* <div className="heading">
-                        <h1 className="genre">Genre</h1>
-                        <h1 className="viewall">View all</h1>
+                    <div className="username">
+                        {user}
                     </div>
-                  <Podcasts
-                    error = {audioNameListError}
-                    isLoaded = {audioNameListIsLoaded}
-                    audioNameList = {audioNameList}
-                  /> */}
+                    <Podcasts
+                        isLoaded = {audioNameListIsLoaded}
+                        audioNameList = {audioNameList}
+                    />
                 </div>
             </div>
         </div>
+    );
+}
+
+export function Podcasts(props) {
+    if (props.audioNameList) {
+  
+      const audioNameList = props.audioNameList;
+      const usernameArray = Object.keys(props.audioNameList);
+      const podcastList = [];
+  
+      // Construct a [fileName, audioName] list
+      usernameArray.forEach(username => {
+        const audioList = audioNameList[username];
+  
+        audioList.forEach(audioName => {
+          if (audioName) {
+            const fileName = username + "_" + audioName;
+            const namesArray = [fileName, audioName, username];
+            podcastList.push(namesArray);
+          }
+  
+        });
+  
+      });
+  
+      return (
+        <div className="podcastcontainer_search">
+          {podcastList.map(namesArray => {
+            const [fileName, audioName, username] = namesArray;
+            return <SinglePodcast
+                     key = {fileName}
+                     fileName = {fileName}
+                     audioName = {audioName}
+                     username={username}
+                   />;
+          })}
+        </div>
+      );
+    } else {
+      return <p>No Podcasts</p>;
+    }
+}
+
+export function SinglePodcast(props) {
+    const [picUrl, setPicUrl] = useState("");
+  
+    const fileName = props.fileName;
+    const audioName = props.audioName;
+    const username = props.username;
+  
+    const data = new FormData();
+    data.append('fileName', fileName);
+  
+    useEffect(() => {
+      
+      fetch("/podcastUrl", {
+          method: "POST",
+          body: data,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+            setPicUrl(data.picUrl);
+        })
+        .catch((error) => {
+            console.error("Error", error);
+        });
+    });
+  
+    return (
+      <div >
+        <Link className="singlePodcast_search" to={{
+          pathname: `podcast/${fileName}`,
+          state: {
+            fileName: `${fileName}`,
+            audioName: `${audioName}`,
+            username: `${username}`,
+          }
+        }}>
+        <img className="coverPicPodcast_search" alt="Cover Picture" src={picUrl}/>
+        <p className="podcastName_search">{audioName}</p>
+        </Link>
+      </div>
     );
 }
 
