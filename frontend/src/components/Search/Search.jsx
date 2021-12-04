@@ -18,7 +18,7 @@ function Search(){
             const data = new FormData();
             data.append('username', search); // search term is a username
 
-            fetch("/podcasts", {
+            fetch("/search", {
                 method: "POST",
                 body: data,
             })
@@ -32,7 +32,9 @@ function Search(){
                         setAudioNameListIsLoaded(true);
                         setUsername(search);
                     }
-
+                    if (infoList == null){
+                        alert("Wrong username");
+                    }
                 }, error => {        
                     alert("Wrong username");
                 })
@@ -47,6 +49,7 @@ function Search(){
     const search_user = () => {
         setUsername("");
         setAudioNameList(null);
+        // setAudioNameListIsLoaded(false);
         setClicker(true);
     };
 
@@ -116,7 +119,7 @@ export function Podcasts(props) {
         </div>
       );
     } else {
-      return <p>No Podcasts</p>;
+      return <p className="nopodcasts" >No Podcasts</p>;
     }
 }
 
