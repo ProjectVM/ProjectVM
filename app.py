@@ -107,9 +107,19 @@ def upload_file():
 @app.route('/search', methods=['POST'])
 def search_by_user():
     username_search = request.form.get('username')
-    info_list = get_audio_list_information(username_search)
+    print(username_search)
+    info_list = get_audiofile_list(username_search)
+    print(info_list)
+    if info_list is None:
+         return {
+            "info_list" : None,
+            "error" : "Invalid Username",
+            "valid" : False
+        }
     return {
-        "info_list" : info_list
+        "info_list" : info_list,
+        "valid" : True,
+        "error" : None
     }
 
 @app.route('/podcasts', methods=['GET'])

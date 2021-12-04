@@ -105,8 +105,9 @@ def get_audiofile_list(username):
     filename_list = []
 
     pods_collect = db["acc_pods"]
+    if pods_collect.find_one({"username": username}) is None:
+        return None
     podcast_list = pods_collect.find_one({"username": username})['podcasts']
-    
     for filename in podcast_list:
         filename_list.append(filename)
         
