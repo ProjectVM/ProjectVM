@@ -111,10 +111,36 @@ def upload_file():
       "MSG": "400"
     }
 
+@app.route('/search', methods=['POST'])
+def search_by_user():
+    username_search = request.form.get('username')
+    print(username_search)
+    info_list = get_audiofile_list(username_search)
+    print(info_list)
+    if info_list is None:
+        return {
+            "info_list" : None,
+            "error" : "Invalid Username",
+            "valid" : False
+        }
+    return {
+        "info_list" : info_list,
+        "valid" : True,
+        "error" : None
+    }
+
 @app.route('/podcasts', methods=['GET'])
 def get_audiofile_information():
     info_list = get_all_audiofile_information()
     print(info_list)
+    return {
+        "info_list" : info_list
+    }
+
+@app.route('/podcasts', methods=['POST'])
+def get_audio_list_information():
+    username = request.form.get('username')
+    info_list = get_audiofile_list(username)
     return {
         "info_list" : info_list
     }
@@ -124,12 +150,21 @@ def get_podcastUrl():
     filename = request.form.get('fileName')
     audioUrl = get_audio_file_url(filename)
     imageUrl = get_image_file_url(filename)
+    descript = get_desc_file_text(filename)
     return {
         "audioUrl" : audioUrl,
-        "picUrl" : imageUrl
+        "picUrl" : imageUrl,
+        "description" : descript
     }
 
-
+@app.route('/delete_pod', methods=['POST'])
+def delete_pod():
+    username = request.form.get('username')
+    podcast_name = request.form.get('podcast_name')
+    delete_podcast(username, podcast_name)
+    return {
+        "status" : 200,
+    }
 
 if __name__ == '__main__':
     app.run()
