@@ -206,3 +206,8 @@ def create_podcast_list(account_data):
     info = {'username': account_data['username'], 'podcasts': []}
 
     return pods_collect.insert_one(info)
+
+#get acc information from database using the email
+def get_acc_with_email(email):
+    collection = db["acc_data"]
+    return collection.find({"email": email})
