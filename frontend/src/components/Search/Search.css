@@ -1,0 +1,102 @@
+.background_search {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(38, 70, 83, 0.9);
+    display: flex;
+    position: absolute;
+  }
+
+.search{
+    position: relative;
+    left: 2vw;
+}
+
+.search_placeholder{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.title_search{
+    position: relative;
+    font-size: 64px;
+    color: white;
+    text-shadow: 5px 5px rgba(38, 70, 83, 0.9);
+    margin: 2vw 0;
+}
+
+.holder{
+    position: relative;
+    height: 8vh;
+    border-radius: 10px;
+    margin-left: 8vw;
+    background-color:  rgba(52, 58, 57, 1);
+}
+
+.Input_search{
+    width: 25vw;
+    margin-left: 2vw;
+    border: black;
+    outline: none;
+    font-size: 20px;
+    color: white;
+    background-color:  rgba(52, 58, 57, 1);
+}
+
+.icon{
+    margin-top: 2.5vh;
+    margin-right: 1vw;
+    color: blanchedalmond;
+    cursor: pointer;
+}
+
+.contentWrapper_search{
+    position: relative;
+    background-color: rgba(52, 58, 57, 1);
+    height: 72vh;
+    width: 73vw;
+    border-radius: 30px;
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.username{
+    font-size: 36px;
+    color: white;
+}
+
+.podcastcontainer_search{
+    top: 1vw;
+    position: relative;
+    /* background-color: black; */
+    display: flex;
+    gap: 4vw;
+}
+
+.singlePodcast_search{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.coverPicPodcast_search{
+    color: black;
+    background-color: rgba(196, 196, 196 , 1);
+    border-radius: 30px;
+    height: 160px;
+    width: 160px;
+    text-align: center;
+}
+  
+.podcastName_search{
+    width: 160px;
+    text-align: center;
+}
+
+.nopodcasts{
+    color: white;
+}
+  
